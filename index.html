@@ -9,16 +9,17 @@
         @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
         
         * {
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
         }
 
         body {
             font-family: 'Source Sans 3', sans-serif;
             margin: 0;
             padding: 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             height: 100vh;
             background: #82EAFF;
             color: #333333;
@@ -26,6 +27,15 @@
         body.dark-mode {
             background: #222222;
             color: #E1D9D1;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
         }
 
         .container {
@@ -38,9 +48,9 @@
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 90%;
+            width: 100%;
             max-width: 400px;
-            margin: auto;
+            margin: 20px;
         }
 
         body.dark-mode .container {
@@ -98,6 +108,12 @@
             background-color: #82ffd6;
             border-radius: 10px;
             width: 0%;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
         }
 
         .button, .settings-button, .dark-mode-button {
@@ -170,14 +186,21 @@
         }
 
         .tasks {
-            margin-top: 20px;
+            margin: 20px;
             text-align: left;
             padding: 30px;
             background: #fff;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            overflow-y: auto;
+            width: 100%;
+            max-width: 400px;
             height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+
+        .tasks::-webkit-scrollbar {
+            display: none; /* For Chrome, Safari, and Opera */
         }
 
         body.dark-mode .tasks {
@@ -273,9 +296,9 @@
         }
 
         @media (max-width: 768px) {
-            body {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto;
+            .main-container {
+                flex-direction: column;
+                align-items: center;
             }
         }
 
@@ -308,229 +331,274 @@
                 transform: scale(1);
             }
         }
+
+        .task-buttons-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .button.delete {
+            background: #f44336;
+        }
+
+        .button.delete:hover {
+            background: #d32f2f;
+        }
+
+        .task-input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .task-input-container input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <button class="dark-mode-button" id="darkModeButton">Toggle Dark Mode</button>
-    <div class="container">
-        <div class="header">
-            <h1>Pomidor</h1>
-            <p>Your personal Pomodoro timer</p>
+    <div class="main-container">
+        <div class="container">
+            <div class="header">
+                <h1>Pomidor</h1>
+                <p>Your personal Pomodoro timer</p>
+            </div>
+            <div class="timer" id="timerDisplay">25:00</div>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            <div class="button-container">
+                <button class="button" id="startButton">Start</button>
+                <button class="button" id="stopButton" disabled>Stop</button>
+                <button class="button" id="resetButton">Reset</button>
+            </div>
+            <button class="settings-button" id="settingsButton">Settings</button>
+            <div class="settings" id="settings">
+                <label for="workDuration">Work (mins):</label>
+                <input type="number" id="workDuration" value="25" min="1" max="60">
+                <label for="breakDuration">Break (mins):</label>
+                <input type="number" id="breakDuration" value="5" min="1" max="30">
+                <label for="longBreakDuration">Long Break (mins):</label>
+                <input type="number" id="longBreakDuration" value="15" min="1" max="60">
+                <label for="sessionsBeforeLongBreak">Sessions before long break:</label>
+                <input type="number" id="sessionsBeforeLongBreak" value="4" min="1" max="10">
+                <label for="autoStartNextSession">Auto-start next session:</label>
+                <input type="checkbox" id="autoStartNextSession">
+            </div>
         </div>
-        <div class="timer" id="timerDisplay">25:00</div>
-        <div class="progress-bar">
-            <div class="progress" id="progressBar"></div>
+        <div class="tasks">
+            <div class="task-input-container">
+                <input type="text" id="newTaskInput" placeholder="Enter Task">
+            </div>
+            <div class="task-actions">
+                <button class="button" id="addTaskButton">Add Task</button>
+                <button class="button delete" id="clearTasksButton">Clear All</button>
+            </div>
+            <h3>Tasks</h3>
+            <ul id="taskList"></ul>
         </div>
-        <button class="button" id="startButton">Start</button>
-        <button class="button" id="stopButton" disabled>Stop</button>
-        <button class="settings-button" id="settingsButton">Settings</button>
-        <div class="settings" id="settings">
-            <label for="workDuration">Work (mins):</label>
-            <input type="number" id="workDuration" value="25" min="1" max="60">
-            <label for="breakDuration">Break (mins):</label>
-            <input type="number" id="breakDuration" value="5" min="1" max="30">
-            <label for="longBreakDuration">Long Break (mins):</label>
-            <input type="number" id="longBreakDuration" value="15" min="1" max="60">
-            <label for="sessionsBeforeLongBreak">Sessions before long break:</label>
-            <input type="number" id="sessionsBeforeLongBreak" value="4" min="1" max="10">
-            <label for="autoStartNextSession">Auto-start next session:</label>
-            <input type="checkbox" id="autoStartNextSession">
-        </div>
-    </div>
-    <div class="tasks">
-        <h3>Tasks</h3>
-        <ul id="taskList"></ul>
-        <input type="text" id="newTaskInput" placeholder="Enter Task">
-        <button class="button" id="addTaskButton">Add Task</button>
     </div>
 
     <audio id="dingSound" src="https://raw.githubusercontent.com/IshanAsati/pomidor/main/Ding.mp3"></audio>
 
     <script>
-        const timerDisplay = document.getElementById('timerDisplay');
-        const progressBar = document.getElementById('progressBar');
-        const startButton = document.getElementById('startButton');
-        const stopButton = document.getElementById('stopButton');
-        const settingsButton = document.getElementById('settingsButton');
-        const darkModeButton = document.getElementById('darkModeButton');
-        const settings = document.getElementById('settings');
-        const workDurationInput = document.getElementById('workDuration');
-        const breakDurationInput = document.getElementById('breakDuration');
-        const longBreakDurationInput = document.getElementById('longBreakDuration');
-        const sessionsBeforeLongBreakInput = document.getElementById('sessionsBeforeLongBreak');
-        const autoStartNextSessionInput = document.getElementById('autoStartNextSession');
-        const taskList = document.getElementById('taskList');
-        const newTaskInput = document.getElementById('newTaskInput');
-        const addTaskButton = document.getElementById('addTaskButton');
-        const dingSound = document.getElementById('dingSound');
+        // DOM Elements
+        const elements = {
+            timer: document.getElementById('timerDisplay'),
+            progress: document.getElementById('progressBar'),
+            buttons: {
+                start: document.getElementById('startButton'),
+                stop: document.getElementById('stopButton'),
+                reset: document.getElementById('resetButton'),
+                settings: document.getElementById('settingsButton'),
+                darkMode: document.getElementById('darkModeButton'),
+                addTask: document.getElementById('addTaskButton'),
+                clearTasks: document.getElementById('clearTasksButton')
+            },
+            inputs: {
+                work: document.getElementById('workDuration'),
+                break: document.getElementById('breakDuration'),
+                longBreak: document.getElementById('longBreakDuration'),
+                sessions: document.getElementById('sessionsBeforeLongBreak'),
+                autoStart: document.getElementById('autoStartNextSession'),
+                newTask: document.getElementById('newTaskInput')
+            },
+            settings: document.getElementById('settings'),
+            taskList: document.getElementById('taskList'),
+            audio: document.getElementById('dingSound')
+        };
 
-        let isWorking = true;
-        let timeLeft = parseInt(workDurationInput.value) * 60;
-        let timerInterval;
-        let sessionCount = 0;
+        // Timer state
+        const timer = {
+            isWorking: true,
+            timeLeft: parseInt(elements.inputs.work.value) * 60,
+            interval: null,
+            sessionCount: 0
+        };
 
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = seconds % 60;
-            return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
-        }
+        // Timer functions
+        const timerFunctions = {
+            formatTime: (seconds) => {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+            },
 
-        function updateProgressBar() {
-            const progressPercentage = ((timeLeft / (isWorking ? parseInt(workDurationInput.value) * 60 : parseInt(breakDurationInput.value) * 60)) * 100);
-            progressBar.style.width = `${progressPercentage}%`;
-        }
+            updateProgressBar: () => {
+                const duration = timer.isWorking ? 
+                    parseInt(elements.inputs.work.value) * 60 : 
+                    parseInt(elements.inputs.break.value) * 60;
+                const progress = (timer.timeLeft / duration) * 100;
+                elements.progress.style.width = `${progress}%`;
+            },
 
-        function startTimer() {
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                timerDisplay.textContent = formatTime(timeLeft);
-                updateProgressBar();
+            start: () => {
+                elements.buttons.start.disabled = true;
+                elements.buttons.stop.disabled = false;
 
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    dingSound.play();
-                    isWorking = !isWorking;
-                    sessionCount++;
-                    if (sessionCount % parseInt(sessionsBeforeLongBreakInput.value) === 0 && !isWorking) {
-                        timeLeft = parseInt(longBreakDurationInput.value) * 60;
-                    } else {
-                        timeLeft = isWorking ? parseInt(workDurationInput.value) * 60 : parseInt(breakDurationInput.value) * 60;
+                timer.interval = setInterval(() => {
+                    timer.timeLeft--;
+                    elements.timer.textContent = timerFunctions.formatTime(timer.timeLeft);
+                    timerFunctions.updateProgressBar();
+
+                    if (timer.timeLeft <= 0) {
+                        timerFunctions.handleTimerComplete();
                     }
-                    if (autoStartNextSessionInput.checked) {
-                        startTimer();
-                    } else {
-                        startButton.disabled = false;
-                        stopButton.disabled = true;
-                    }
+                }, 1000);
+            },
+
+            stop: () => {
+                clearInterval(timer.interval);
+                elements.buttons.start.disabled = false;
+                elements.buttons.stop.disabled = true;
+            },
+
+            reset: () => {
+                clearInterval(timer.interval);
+                timer.timeLeft = parseInt(elements.inputs.work.value) * 60;
+                elements.timer.textContent = timerFunctions.formatTime(timer.timeLeft);
+                timerFunctions.updateProgressBar();
+                elements.buttons.start.disabled = false;
+                elements.buttons.stop.disabled = true;
+            },
+
+            handleTimerComplete: () => {
+                clearInterval(timer.interval);
+                elements.audio.play();
+                timer.isWorking = !timer.isWorking;
+                timer.sessionCount++;
+
+                if (timer.sessionCount % parseInt(elements.inputs.sessions.value) === 0 && !timer.isWorking) {
+                    timer.timeLeft = parseInt(elements.inputs.longBreak.value) * 60;
+                } else {
+                    timer.timeLeft = timer.isWorking ? 
+                        parseInt(elements.inputs.work.value) * 60 : 
+                        parseInt(elements.inputs.break.value) * 60;
                 }
-            }, 1000);
-        }
 
-        startButton.addEventListener('click', () => {
-            startButton.disabled = true;
-            stopButton.disabled = false;
-            startTimer();
-        });
-
-        stopButton.addEventListener('click', () => {
-            clearInterval(timerInterval);
-            startButton.disabled = false;
-            stopButton.disabled = true;
-        });
-
-        settingsButton.addEventListener('click', () => {
-            settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
-        });
-
-        darkModeButton.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
-
-        workDurationInput.addEventListener('input', () => {
-            if (isWorking) {
-                timeLeft = parseInt(workDurationInput.value) * 60;
-                timerDisplay.textContent = formatTime(timeLeft);
-                updateProgressBar();
+                if (elements.inputs.autoStart.checked) {
+                    timerFunctions.start();
+                } else {
+                    elements.buttons.start.disabled = false;
+                    elements.buttons.stop.disabled = true;
+                }
             }
-        });
+        };
 
-        breakDurationInput.addEventListener('input', () => {
-            if (!isWorking) {
-                timeLeft = parseInt(breakDurationInput.value) * 60;
-                timerDisplay.textContent = formatTime(timeLeft);
-                updateProgressBar();
-            }
-        });
-
-        longBreakDurationInput.addEventListener('input', () => {
-            if (!isWorking && sessionCount % parseInt(sessionsBeforeLongBreakInput.value) === 0) {
-                timeLeft = parseInt(longBreakDurationInput.value) * 60;
-                timerDisplay.textContent = formatTime(timeLeft);
-                updateProgressBar();
-            }
-        });
-
-        function saveTasks() {
-            const tasks = [];
-            taskList.querySelectorAll('li').forEach(li => {
-                tasks.push({
+        // Task functions
+        const taskFunctions = {
+            save: () => {
+                const tasks = Array.from(elements.taskList.children).map(li => ({
                     text: li.querySelector('span').textContent,
                     completed: li.classList.contains('completed')
-                });
-            });
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-        }
+                }));
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            },
 
-        function loadTasks() {
-            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            tasks.forEach(task => {
+            load: () => {
+                const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                tasks.forEach(taskFunctions.add);
+            },
+
+            add: (task) => {
                 const li = document.createElement('li');
                 const span = document.createElement('span');
-                span.textContent = task.text;
+                span.textContent = task.text || task;
                 li.appendChild(span);
+
                 if (task.completed) {
                     li.classList.add('completed');
                 }
-                const taskButtons = document.createElement('div');
-                taskButtons.classList.add('task-buttons');
-                const completeButton = document.createElement('button');
-                completeButton.textContent = '✔';
-                completeButton.addEventListener('click', () => {
-                    li.classList.toggle('completed');
-                    saveTasks();
-                });
-                const removeButton = document.createElement('button');
-                removeButton.textContent = '✖';
-                removeButton.classList.add('delete');
-                removeButton.addEventListener('click', () => {
-                    li.remove();
-                    saveTasks();
-                });
-                taskButtons.appendChild(completeButton);
-                taskButtons.appendChild(removeButton);
-                li.appendChild(taskButtons);
-                taskList.appendChild(li);
-            });
-        }
 
-        addTaskButton.addEventListener('click', () => {
-            const taskText = newTaskInput.value.trim();
-            if (taskText) {
-                const li = document.createElement('li');
-                const span = document.createElement('span');
-                span.textContent = taskText;
-                li.appendChild(span);
                 const taskButtons = document.createElement('div');
                 taskButtons.classList.add('task-buttons');
+
                 const completeButton = document.createElement('button');
                 completeButton.textContent = '✔';
-                completeButton.addEventListener('click', () => {
+                completeButton.onclick = () => {
                     li.classList.toggle('completed');
-                    saveTasks();
-                });
+                    taskFunctions.save();
+                };
+
                 const removeButton = document.createElement('button');
                 removeButton.textContent = '✖';
                 removeButton.classList.add('delete');
-                removeButton.addEventListener('click', () => {
+                removeButton.onclick = () => {
                     li.remove();
-                    saveTasks();
-                });
-                taskButtons.appendChild(completeButton);
-                taskButtons.appendChild(removeButton);
+                    taskFunctions.save();
+                };
+
+                taskButtons.append(completeButton, removeButton);
                 li.appendChild(taskButtons);
-                taskList.appendChild(li);
-                newTaskInput.value = '';
-                saveTasks();
+                elements.taskList.appendChild(li);
+            },
+
+            clear: () => {
+                if (confirm('Are you sure you want to delete all tasks?')) {
+                    elements.taskList.innerHTML = '';
+                    taskFunctions.save();
+                }
             }
-        });
+        };
 
-        newTaskInput.addEventListener('keypress', (e) => {
+        // Event Listeners
+        elements.buttons.start.onclick = timerFunctions.start;
+        elements.buttons.stop.onclick = timerFunctions.stop;
+        elements.buttons.reset.onclick = timerFunctions.reset;
+        elements.buttons.settings.onclick = () => {
+            elements.settings.style.display = elements.settings.style.display === 'none' ? 'block' : 'none';
+        };
+        elements.buttons.darkMode.onclick = () => document.body.classList.toggle('dark-mode');
+        elements.buttons.addTask.onclick = () => {
+            const text = elements.inputs.newTask.value.trim();
+            if (text) {
+                taskFunctions.add(text);
+                elements.inputs.newTask.value = '';
+                taskFunctions.save();
+            }
+        };
+        elements.buttons.clearTasks.onclick = taskFunctions.clear;
+
+        elements.inputs.newTask.onkeypress = (e) => {
             if (e.key === 'Enter') {
-                addTaskButton.click();
+                elements.buttons.addTask.click();
             }
-        });
+        };
 
-        loadTasks();
+        // Initialize
+        taskFunctions.load();
     </script>
 </body>
 </html>
