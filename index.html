@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Pomidor Timer</title>
     <link rel="icon" href="https://raw.githubusercontent.com/IshanAsati/pomidor/main/LOGO.png" type="image/png">
     <style>
@@ -299,6 +299,101 @@
             .main-container {
                 flex-direction: column;
                 align-items: center;
+                padding: 10px;
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+                margin: 0;
+            }
+
+            .container, .tasks {
+                width: calc(100% - 20px);
+                margin: 10px;
+                padding: 15px;
+                max-width: none;
+                box-sizing: border-box;
+            }
+
+            .task-input-container {
+                width: 100%;
+            }
+
+            .task-input-container input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .tasks input {
+                width: 100%;
+                box-sizing: border-box;
+                margin-right: 0;
+            }
+
+            .button-container {
+                flex-wrap: wrap;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .settings {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 15px;
+            }
+
+            body {
+                padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+                width: 100%;
+                min-height: 100vh;
+                overflow-x: hidden;
+            }
+
+            .timer {
+                font-size: 3rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .button-container {
+                flex-wrap: wrap;
+            }
+
+            .button, .settings-button, .dark-mode-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                width: auto;
+            }
+
+            .settings input[type="number"],
+            .settings input[type="checkbox"] {
+                padding: 8px;
+            }
+
+            .task-input-container {
+                flex-direction: column;
+            }
+
+            .task-actions {
+                flex-wrap: wrap;
+            }
+
+            .dark-mode-button {
+                top: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+
+            .tasks li {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+
+            .task-buttons button {
+                padding: 4px 8px;
+                font-size: 0.8rem;
             }
         }
 
