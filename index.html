@@ -6,24 +6,28 @@
     <title>Pomidor Timer</title>
     <link rel="icon" href="https://raw.githubusercontent.com/IshanAsati/pomidor/main/LOGO.png" type="image/png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+        
+        * {
+            transition: all 0.5s ease;
+        }
 
         body {
-            font-family: 'Source Sans Pro', sans-serif;
+            font-family: 'Source Sans 3', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             background: #82EAFF;
-            color: #222222;
+            color: #333333; /* Darker text color */
             justify-content: center;
             align-items: center;
             height: 100vh;
             animation: fadeIn 1s ease-in-out;
+            position: relative;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        body.dark-mode {
+            background: #222222;
+            color: #E1D9D1;
         }
 
         .container {
@@ -37,13 +41,9 @@
             animation: slideIn 1s ease-in-out;
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .header {
-            margin-bottom: 20px;
+        body.dark-mode .container {
+            background: #333333;
+            color: #ffffff;
         }
 
         .header h1 {
@@ -52,22 +52,29 @@
             color: #222222;
         }
 
+        body.dark-mode .header h1 {
+            color: #ffffff;
+        }
+
         .header p {
             font-size: 1rem;
-            color: #666;
+            color: #333333; /* Darker text color */
+        }
+
+        body.dark-mode .header p {
+            color: #cccccc;
         }
 
         .timer {
             font-size: 4rem;
             font-weight: bold;
-            color: #333;
+            color: #333333; /* Darker text color */
             margin-bottom: 20px;
             animation: pulse 1s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        body.dark-mode .timer {
+            color: #ffffff;
         }
 
         .progress-bar {
@@ -80,35 +87,63 @@
             position: relative;
         }
 
-        .progress {
-            height: 100%;
-            background-color: #4caf50;
-            border-radius: 10px;
-            width: 0%;
-            transition: width 1s ease-in-out;
+        body.dark-mode .progress-bar {
+            background-color: #555555;
         }
 
-        .button, .settings-button {
+        .progress {
+            height: 100%;
+            background-color: #82ffd6;
+            border-radius: 10px;
+            width: 0%;
+        }
+
+        .button, .settings-button, .dark-mode-button {
             padding: 12px 25px;
             font-size: 1rem;
-            background-color: #4caf50;
+            background-color: #82EAFF;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             outline: none;
-            transition: background-color 0.3s ease, transform 0.3s ease;
             margin: 5px;
-            color: #fff;
+            color: #ffffff;
+        }
+        
+        .settings-button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            background-color: #82EAFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+            margin: 5px;
+            color: #ffffff;
         }
 
-        .button:hover, .settings-button:hover {
-            background-color: #45a049;
+        .button:hover, .settings-button:hover, .dark-mode-button:hover {
+            background-color: #82acff;
             transform: scale(1.1);
+        }
+
+        .button:active, .settings-button:active, .dark-mode-button:active {
+            transform: scale(0.9);
+        }
+
+        body.dark-mode .button, body.dark-mode .settings-button, body.dark-mode .dark-mode-button {
+            background-color: #444444;
+            color: #E1D9D1;
+        }
+
+        body.dark-mode .button:hover, body.dark-mode .settings-button:hover, body.dark-mode .dark-mode-button:hover {
+            background-color: #777777;
+            color: #E1D9D1;
         }
 
         .settings {
             font-size: 1rem;
-            color: #333;
+            color: #333333; /* Darker text color */
             display: none;
             margin-top: 20px;
             animation: fadeIn 0.5s ease-in-out;
@@ -118,26 +153,30 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
+        body.dark-mode .settings {
+            background: #444444;
+            color: #ffffff;
+        }
+
         .settings label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             font-weight: bold;
         }
 
-        .settings input {
-            width: 100%;
+        .settings input[type="number"], .settings input[type="checkbox"] {
+            display: block;
+            margin-bottom: 20px;
             padding: 10px;
-            margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            background-color: #fff;
-            color: #333;
-            text-align: center;
-            transition: background-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .settings input:focus {
-            background-color: #e0e0e0;
+        body.dark-mode .settings input[type="number"], body.dark-mode .settings input[type="checkbox"] {
+            background-color: #666666;
+            color: #ffffff;
         }
 
         .tasks {
@@ -151,11 +190,14 @@
             color: #222222;
         }
 
+        body.dark-mode .tasks h3 {
+            color: #ffffff;
+        }
+
         .tasks ul {
             list-style: none;
             padding: 0;
         }
-
         .tasks li {
             background: #f9f9f9;
             padding: 10px;
@@ -164,25 +206,40 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: slideIn 0.5s ease-in-out;
+            animation: slideIn 0.5s ease-in-out, fadeIn 0.5s ease-in-out;
+        }
+        
+
+        body.dark-mode .tasks li {
+            background: #555555;
         }
 
-        .tasks li.completed {
+        .tasks li.completed span {
             text-decoration: line-through;
             color: #999;
         }
 
+        .tasks .task-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
         .tasks button {
-            background: none;
+            background: #82EAFF;
             border: none;
             cursor: pointer;
             color: #fff;
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
+            font-size: 1rem;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .tasks button.delete {
+            background: #f44336;
         }
 
         .tasks button:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
 
         .tasks input {
@@ -192,12 +249,26 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             background-color: #f9f9f9;
-            color: #333;
-            transition: background-color 0.3s ease;
+            color: #333333; /* Darker text color */
         }
 
-        .tasks input:focus {
-            background-color: #e0e0e0;
+        body.dark-mode .tasks input {
+            background-color: #666666;
+            color: #ffffff;
+        }
+
+        body.dark-mode .tasks input::placeholder {
+            color: #cccccc;
+        }
+
+        .dark-mode-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #444444;
+            color: #ffffff;
+            border-radius: 5px;
         }
 
         @media (min-width: 600px) {
@@ -209,9 +280,40 @@
                 font-size: 5rem;
             }
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 <body>
+    <button class="dark-mode-button" id="darkModeButton">Toggle Dark Mode</button>
     <div class="container">
         <div class="header">
             <h1>Pomidor</h1>
@@ -239,12 +341,12 @@
         <div class="tasks">
             <h3>Tasks</h3>
             <ul id="taskList"></ul>
-            <input type="text" id="newTaskInput" placeholder="New task">
-            <button class="button" id="addTaskButton" style="background-color: #4caf50; color: #fff;">Add Task</button>
+            <input type="text" id="newTaskInput" placeholder="Enter Task">
+            <button class="button" id="addTaskButton">Add Task</button>
         </div>
     </div>
 
-    <audio id="dingSound" src="https://github.com/IshanAsati/pomidor/blob/main/Ding.mp3?raw=true"></audio>
+    <audio id="dingSound" src="https://raw.githubusercontent.com/IshanAsati/pomidor/main/Ding.mp3"></audio>
 
     <script>
         const timerDisplay = document.getElementById('timerDisplay');
@@ -252,6 +354,7 @@
         const startButton = document.getElementById('startButton');
         const stopButton = document.getElementById('stopButton');
         const settingsButton = document.getElementById('settingsButton');
+        const darkModeButton = document.getElementById('darkModeButton');
         const settings = document.getElementById('settings');
         const workDurationInput = document.getElementById('workDuration');
         const breakDurationInput = document.getElementById('breakDuration');
@@ -321,6 +424,10 @@
             settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
         });
 
+        darkModeButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
         workDurationInput.addEventListener('input', () => {
             if (isWorking) {
                 timeLeft = parseInt(workDurationInput.value) * 60;
@@ -349,7 +456,7 @@
             const tasks = [];
             taskList.querySelectorAll('li').forEach(li => {
                 tasks.push({
-                    text: li.firstChild.textContent,
+                    text: li.querySelector('span').textContent,
                     completed: li.classList.contains('completed')
                 });
             });
@@ -360,17 +467,30 @@
             const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
             tasks.forEach(task => {
                 const li = document.createElement('li');
-                li.textContent = task.text;
+                const span = document.createElement('span');
+                span.textContent = task.text;
+                li.appendChild(span);
                 if (task.completed) {
                     li.classList.add('completed');
                 }
+                const taskButtons = document.createElement('div');
+                taskButtons.classList.add('task-buttons');
                 const completeButton = document.createElement('button');
                 completeButton.textContent = '✔';
                 completeButton.addEventListener('click', () => {
                     li.classList.toggle('completed');
                     saveTasks();
                 });
-                li.appendChild(completeButton);
+                const removeButton = document.createElement('button');
+                removeButton.textContent = '✖';
+                removeButton.classList.add('delete');
+                removeButton.addEventListener('click', () => {
+                    li.remove();
+                    saveTasks();
+                });
+                taskButtons.appendChild(completeButton);
+                taskButtons.appendChild(removeButton);
+                li.appendChild(taskButtons);
                 taskList.appendChild(li);
             });
         }
@@ -379,17 +499,36 @@
             const taskText = newTaskInput.value.trim();
             if (taskText) {
                 const li = document.createElement('li');
-                li.textContent = taskText;
+                const span = document.createElement('span');
+                span.textContent = taskText;
+                li.appendChild(span);
+                const taskButtons = document.createElement('div');
+                taskButtons.classList.add('task-buttons');
                 const completeButton = document.createElement('button');
                 completeButton.textContent = '✔';
                 completeButton.addEventListener('click', () => {
                     li.classList.toggle('completed');
                     saveTasks();
                 });
-                li.appendChild(completeButton);
+                const removeButton = document.createElement('button');
+                removeButton.textContent = '✖';
+                removeButton.classList.add('delete');
+                removeButton.addEventListener('click', () => {
+                    li.remove();
+                    saveTasks();
+                });
+                taskButtons.appendChild(completeButton);
+                taskButtons.appendChild(removeButton);
+                li.appendChild(taskButtons);
                 taskList.appendChild(li);
                 newTaskInput.value = '';
                 saveTasks();
+            }
+        });
+
+        newTaskInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                addTaskButton.click();
             }
         });
 
