@@ -512,7 +512,7 @@
 
         .statistics {
             margin-top: 20px;
-            padding: 15px;
+            padding: 0px;
             background: #f5f5f5;
             border-radius: 5px;
         }
@@ -574,34 +574,21 @@
 
         .statistics-panel {
             width: 100%;
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 15px;
+            max-width: 350px; /* Limit maximum width */
+            margin: 20px auto; /* Center horizontally */
+            padding: 20px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .statistics-panel h4 {
-            margin: 0 0 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            font-size: 1.2rem;
-            color: #333;
+            box-sizing: border-box; /* Ensure padding is included in width */
         }
 
-        .statistics-panel p {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 10px 0;
-            padding: 8px;
-            background: rgba(130, 234, 255, 0.1);
-            border-radius: 8px;
-        }
-
-        .statistics-panel span {
-            font-weight: bold;
-            color: #82EAFF;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
         }
 
         body.dark-mode .statistics-panel {
@@ -1325,16 +1312,70 @@
                 min-height: 45px;
             }
         }
+
+        .empty-tasks {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            font-size: 1.1rem;
+            animation: fadeIn 0.5s ease-out;
+            display: none;
+        }
+
+        .empty-tasks.visible {
+            display: block;
+        }
+
+        .empty-tasks img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .empty-tasks p {
+            margin: 10px 0;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tasks li {
+            animation: slideIn 0.3s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .tasks li:hover {
+            transform: translateX(5px);
+        }
+
+        .task-buttons button {
+            transition: all 0.3s ease;
+        }
+
+        .task-buttons button:hover {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
     </style>
 </head>
 <body>
     <button class="dark-mode-button" id="darkModeButton">Toggle Dark Mode</button>
-    <div class="import-export">
-        <button id="exportButton">📤 Export</button>
-        <button id="importButton">📥 Import</button>
-        <input type="file" id="importInput" accept=".json">
-    </div>
-       <div class="main-container">
+    <div class="main-container">
         <div class="container">
             <div class="header">
                 <img src="https://raw.githubusercontent.com/IshanAsati/pomidor/main/logo.png" alt="Pomidor" class="logo">
@@ -1394,6 +1435,11 @@
             </div>
             <h3>Tasks</h3>
             <ul id="taskList"></ul>
+            <div class="empty-tasks" id="emptyTasks">
+                <img src="https://raw.githubusercontent.com/IshanAsati/pomidor/main/logo.png" alt="No tasks" style="border-radius: 50%">
+                <p>🎉 Yay! No tasks pending!</p>
+                <p>Time to relax or add new tasks</p>
+            </div>
         </div>
     </div>
 
@@ -1470,6 +1516,13 @@
             isRunning: false  // Add this line to track timer state
         };
 
+        // Add statistics state
+        const stats = {
+            pomodoros: parseInt(localStorage.getItem('pomodoros')) || 0,
+            completedTasks: parseInt(localStorage.getItem('completedTasks')) || 0,
+            focusTime: parseInt(localStorage.getItem('focusTime')) || 0
+        };
+
         // Timer functions
         const timerFunctions = {
             formatTime: (seconds) => {
@@ -1519,6 +1572,7 @@
                 elements.audio.play();
                 timer.isWorking = !timer.isWorking;
                 timer.sessionCount++;
+                updateStatistics(); // Add this line
 
                 if (timer.sessionCount % parseInt(elements.inputs.sessions.value) === 0 && !timer.isWorking) {
                     timer.timeLeft = parseInt(elements.inputs.longBreak.value) * 60;
@@ -1551,6 +1605,7 @@
             load: () => {
                 const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
                 tasks.forEach(taskFunctions.add);
+                taskFunctions.updateEmptyState();
             },
             add: (task) => {
                 const li = document.createElement('li');
@@ -1601,11 +1656,13 @@
                     li.remove();
                     taskFunctions.save();
                     updateStatistics();
+                    taskFunctions.updateEmptyState();
                 };
 
                 buttons.append(completeBtn, deleteBtn);
                 li.appendChild(buttons);
                 elements.taskList.appendChild(li);
+                taskFunctions.updateEmptyState();
 
                 if (task.completed) {
                     li.classList.add('completed');
@@ -1615,9 +1672,42 @@
                 if (confirm('Are you sure you want to delete all tasks?')) {
                     elements.taskList.innerHTML = '';
                     taskFunctions.save();
+                    taskFunctions.updateEmptyState();
+                    updateStatistics();
                 }
+            },
+            updateEmptyState: () => {
+                const emptyState = document.getElementById('emptyTasks');
+                const hasNoTasks = elements.taskList.children.length === 0;
+                emptyState.classList.toggle('visible', hasNoTasks);
             }
         };
+
+        // Update the updateStatistics function
+        const updateStatistics = () => {
+            const tasks = Array.from(elements.taskList.children);
+            const completedTasks = tasks.filter(task => task.classList.contains('completed')).length;
+            
+            stats.completedTasks = completedTasks;
+            stats.pomodoros = timer.sessionCount;
+            stats.focusTime = Math.floor(timer.sessionCount * parseInt(elements.inputs.work.value));
+            
+            // Update display
+            elements.statistics.tasks.textContent = stats.completedTasks;
+            elements.statistics.pomodoros.textContent = stats.pomodoros;
+            elements.statistics.focusTime.textContent = stats.focusTime;
+            
+            // Save to localStorage
+            localStorage.setItem('pomodoros', stats.pomodoros);
+            localStorage.setItem('completedTasks', stats.completedTasks);
+            localStorage.setItem('focusTime', stats.focusTime);
+        };
+
+        // Update timer initialization to load saved session count
+        timer.sessionCount = stats.pomodoros;
+
+        // Initialize statistics display
+        updateStatistics();
 
         // Event Listeners
         elements.buttons.start.onclick = timerFunctions.start;
@@ -1627,403 +1717,29 @@
             elements.settings.style.display = elements.settings.style.display === 'none' ? 'block' : 'none';
         };
         elements.buttons.darkMode.onclick = () => document.body.classList.toggle('dark-mode');
-        elements.buttons.addTask.onclick = () => {
-            const text = elements.inputs.newTask.value.trim();
-            if (text) {
+        const addTask = () => {
+            const taskText = elements.inputs.newTask.value.trim();
+            if (taskText) {
                 taskFunctions.add({
-                    text: text,
+                    text: taskText,
                     priority: elements.inputs.priority.value,
                     category: elements.inputs.category.value
                 });
+                taskFunctions.save();
                 elements.inputs.newTask.value = '';
                 elements.inputs.category.value = '';
-                taskFunctions.save();
-                updateStatistics();
             }
         };
-        elements.buttons.clearTasks.onclick = taskFunctions.clear;
 
-        elements.inputs.newTask.onkeypress = (e) => {
+        elements.buttons.addTask.onclick = addTask;
+        elements.inputs.newTask.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                elements.buttons.addTask.click();
-            }
-        };
-
-        // Add notification support
-        if ('Notification' in window) {
-            Notification.requestPermission();
-        }
-
-        // Modify handleTimerComplete function
-        const oldHandleTimerComplete = timerFunctions.handleTimerComplete;
-        timerFunctions.handleTimerComplete = () => {
-            oldHandleTimerComplete();
-            
-            // Update statistics
-            if (timer.isWorking) {
-                const stats = JSON.parse(localStorage.getItem('statistics') || '{"pomodoros":0,"focusTime":0}');
-                stats.pomodoros++;
-                stats.focusTime += parseInt(elements.inputs.work.value);
-                localStorage.setItem('statistics', JSON.stringify(stats));
-                updateStatistics();
-            }
-
-            // Show notification
-            if (elements.inputs.notificationsEnabled.checked && Notification.permission === 'granted') {
-                new Notification('Pomidor Timer', {
-                    body: timer.isWorking ? 'Time for a break!' : 'Break is over!',
-                    icon: 'https://raw.githubusercontent.com/IshanAsati/pomidor/main/LOGO.png'
-                });
-            }
-        };
-
-        // Add statistics update function
-        function updateStatistics() {
-            const stats = JSON.parse(localStorage.getItem('statistics') || '{"pomodoros":0,"focusTime":0,"completedTasks":0}');
-            
-            // Update completed tasks count
-            const completedTasks = document.querySelectorAll('.tasks li.completed').length;
-            stats.completedTasks = completedTasks;
-            
-            // Update the display
-            elements.statistics.pomodoros.textContent = stats.pomodoros || 0;
-            elements.statistics.tasks.textContent = stats.completedTasks || 0;
-            elements.statistics.focusTime.textContent = stats.focusTime || 0;
-            
-            // Save updated stats
-            localStorage.setItem('statistics', JSON.stringify(stats));
-        }
-
-        // Add this to ensure statistics are updated when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            updateStatistics();
-        });
-
-        // Initialize statistics on load
-        updateStatistics();
-
-        // Initialize
-        taskFunctions.load();
-
-        // Add these event listeners right before the initialization code
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden && timer.isRunning) {
-                elements.lastActiveTime = Date.now();
-                elements.remainingTimeBeforePause = timer.timeLeft;
-                timerFunctions.stop();
-            } else {
-                if (elements.remainingTimeBeforePause !== null) {
-                    const timePassed = Math.floor((Date.now() - elements.lastActiveTime) / 1000);
-                    timer.timeLeft = Math.max(0, elements.remainingTimeBeforePause - timePassed);
-                    elements.timer.textContent = timerFunctions.formatTime(timer.timeLeft);
-                    timerFunctions.updateProgressBar();
-                    timerFunctions.start();
-                    elements.remainingTimeBeforePause = null;
-                }
+                addTask();
             }
         });
-
-        window.addEventListener('beforeunload', () => {
-            if (timer.isRunning) {
-                timerFunctions.stop();
-            }
-        });
-
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            if (e.target.tagName === 'INPUT') return; // Don't trigger when typing in inputs
             
-            switch(e.key.toLowerCase()) {
-                case ' ': // Space
-                    e.preventDefault();
-                    if (!timer.isRunning) {
-                        timerFunctions.start();
-                    } else {
-                        timerFunctions.stop();
-                    }
-                    break;
-                case 'r':
-                    timerFunctions.reset();
-                    break;
-                case 's':
-                    elements.settings.style.display = 
-                        elements.settings.style.display === 'none' ? 'block' : 'none';
-                    break;
-                case 'd':
-                    document.body.classList.toggle('dark-mode');
-                    break;
-                case 'n':
-                    elements.inputs.newTask.focus();
-                    break;
-                case 'f':
-                    fullscreenTimer.toggle();
-                    break;
-            }
-        });
-
-        // Add to elements object
-        elements.focusMode = {
-            overlay: document.getElementById('focusModeOverlay'),
-            ambientSelect: document.getElementById('ambientSound'),
-            ambientVolume: document.getElementById('ambientVolume'),
-            sounds: {
-                rain: document.getElementById('rainSound'),
-                waves: document.getElementById('wavesSound'),
-                cafe: document.getElementById('cafeSound'),
-                forest: document.getElementById('forestSound')
-            }
-        };
-
-        // Add focus mode functions
-        const focusMode = {
-            active: false,
-            toggle: () => {
-                focusMode.active = !focusMode.active;
-                document.body.classList.toggle('focus-active');
-                document.getElementById('focusModeOverlay').classList.toggle('active');
-            }
-        };
-
-        // Add event listeners
-        elements.focusMode.ambientSelect.onchange = focusMode.playAmbient;
-        elements.focusMode.ambientVolume.oninput = () => {
-            if (focusMode.currentSound) {
-                focusMode.currentSound.volume = elements.focusMode.ambientVolume.value / 100;
-            }
-        };
-
-        // Update the statistics tracking
-        function updateStatistics() {
-            const stats = JSON.parse(localStorage.getItem('statistics') || 
-                '{"pomodoros":0,"focusTime":0,"dailyStreak":0,"lastActive":""}');
-            
-            const today = new Date().toDateString();
-            if (stats.lastActive !== today) {
-                if (new Date(stats.lastActive).toDateString() === 
-                    new Date(Date.now() - 86400000).toDateString()) {
-                    stats.dailyStreak++;
-                } else {
-                    stats.dailyStreak = 1;
-                }
-                stats.lastActive = today;
-            }
-
-            const completedTasks = document.querySelectorAll('.tasks li.completed').length;
-            
-            elements.statistics.pomodoros.textContent = stats.pomodoros;
-            elements.statistics.focusTime.textContent = stats.focusTime;
-            elements.statistics.tasks.textContent = completedTasks;
-            
-            localStorage.setItem('statistics', JSON.stringify({
-                ...stats,
-                completedTasks
-            }));
-        }
-
-        // Initialize
-        updateStatistics();
-        taskFunctions.load();
-
-        // Add sound initialization
-        document.addEventListener('DOMContentLoaded', () => {
-            // Preload sounds
-            const sounds = [
-                elements.audio,
-                ...Object.values(elements.focusMode.sounds)
-            ];
-            
-            sounds.forEach(sound => {
-                sound.load();
-                sound.volume = elements.inputs.soundVolume.value / 100;
-            });
-
-            // Update sound volume when changed
-            elements.inputs.soundVolume.addEventListener('input', (e) => {
-                const volume = e.target.value / 100;
-                sounds.forEach(sound => sound.volume = volume);
-            });
-
-            // Enable sound on first user interaction
-            const enableAudio = () => {
-                sounds.forEach(sound => {
-                    sound.play().then(() => sound.pause()).catch(() => {});
-                });
-                document.removeEventListener('click', enableAudio);
-            };
-            document.addEventListener('click', enableAudio);
-        });
-
-        // Update handleTimerComplete to ensure sound plays and reset wasRunning state
-        const originalHandleTimerComplete = timerFunctions.handleTimerComplete;
-        timerFunctions.handleTimerComplete = () => {
-            if (elements.inputs.soundEnabled.checked) {
-                elements.audio.currentTime = 0;
-                elements.audio.play().catch(() => {});
-            }
-            wasRunning = false; // Reset wasRunning when timer completes
-            originalHandleTimerComplete();
-        };
-
-        // Add import/export functionality
-        const importExport = {
-            export: () => {
-                const data = {
-                    tasks: Array.from(elements.taskList.children).map(li => ({
-                        text: li.querySelector('.task-text').textContent,
-                        completed: li.classList.contains('completed'),
-                        priority: li.dataset.priority,
-                        category: li.querySelector('.task-category')?.textContent
-                    })),
-                    settings: {
-                        workDuration: elements.inputs.work.value,
-                        breakDuration: elements.inputs.break.value,
-                        longBreakDuration: elements.inputs.longBreak.value,
-                        sessionsBeforeLongBreak: elements.inputs.sessions.value,
-                        autoStartNextSession: elements.inputs.autoStart.checked,
-                        notificationsEnabled: elements.inputs.notificationsEnabled.checked,
-                        soundEnabled: elements.inputs.soundEnabled.checked,
-                        soundVolume: elements.inputs.soundVolume.value
-                    },
-                    statistics: JSON.parse(localStorage.getItem('statistics') || '{}')
-                };
-
-                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'pomidor-backup.json';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            },
-            import: async (file) => {
-                try {
-                    const text = await file.text();
-                    const data = JSON.parse(text);
-
-                    // Import settings
-                    if (data.settings) {
-                        Object.entries(data.settings).forEach(([key, value]) => {
-                            const input = elements.inputs[key];
-                            if (input) {
-                                if (typeof value === 'boolean') {
-                                    input.checked = value;
-                                } else {
-                                    input.value = value;
-                                }
-                            }
-                        });
-                    }
-
-                    // Import tasks
-                    if (data.tasks) {
-                        elements.taskList.innerHTML = '';
-                        data.tasks.forEach(taskFunctions.add);
-                    }
-
-                    // Import statistics
-                    if (data.statistics) {
-                        localStorage.setItem('statistics', JSON.stringify(data.statistics));
-                        updateStatistics();
-                    }
-
-                    alert('Import successful!');
-                } catch (error) {
-                    alert('Error importing data. Please make sure the file is valid.');
-                    console.error(error);
-                }
-            }
-        };
-
-        // Add event listeners for import/export
-        document.getElementById('exportButton').onclick = importExport.export;
-        document.getElementById('importButton').onclick = () => document.getElementById('importInput').click();
-        document.getElementById('importInput').onchange = (e) => {
-            if (e.target.files.length > 0) {
-                importExport.import(e.target.files[0]);
-            }
-        };
-
-        // Fix tab switching behavior
-        let wasRunning = false;
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                wasRunning = timer.isRunning;
-                if (wasRunning) {
-                    timerFunctions.stop();
-                }
-            } else {
-                if (wasRunning) {
-                    timerFunctions.start();
-                    wasRunning = false;
-                }
-            }
-        });
-
-        // Update viewport height for mobile browsers
-        function updateMobileHeight() {
-            document.documentElement.style.setProperty(
-                '--vh', 
-                `${window.innerHeight * 0.01}px`
-            );
-        }
-
-        window.addEventListener('resize', updateMobileHeight);
-        window.addEventListener('orientationchange', updateMobileHeight);
-        updateMobileHeight();
-
-        // Fix mobile double-tap
-        document.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            e.target.click();
-        }, false);
-
-        // Replace focus mode with fullscreen mode
-        const fullscreenTimer = {
-            active: false,
-            timerDisplay: null,
-            progressBar: null,
-            
-            init: () => {
-                const container = document.getElementById('fullscreenTimer');
-                fullscreenTimer.timerDisplay = container.querySelector('.timer');
-                fullscreenTimer.progressBar = container.querySelector('.progress');
-                
-                container.querySelector('.exit-fullscreen').onclick = fullscreenTimer.toggle;
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && fullscreenTimer.active) {
-                        fullscreenTimer.toggle();
-                    }
-                    if (e.key === 'f') {
-                        fullscreenTimer.toggle();
-                    }
-                });
-            },
-            
-            toggle: () => {
-                fullscreenTimer.active = !fullscreenTimer.active;
-                document.getElementById('fullscreenTimer').classList.toggle('active');
-                if (fullscreenTimer.active) {
-                    fullscreenTimer.update();
-                }
-            },
-            
-            update: () => {
-                if (!fullscreenTimer.active) return;
-                fullscreenTimer.timerDisplay.textContent = elements.timer.textContent;
-                fullscreenTimer.progressBar.style.width = elements.progress.style.width;
-                requestAnimationFrame(fullscreenTimer.update);
-            }
-        };
-
-        // Initialize fullscreen timer
-        document.addEventListener('DOMContentLoaded', () => {
-            fullscreenTimer.init();
-            updateStatistics();
-            taskFunctions.load();
-        });
-    </script>
-
-</body>
+                    // Initialize tasks
+                    taskFunctions.load();
+                </script>
+        </body>
 </html>
