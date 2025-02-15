@@ -9,6 +9,7 @@ Pomidor Timer is a simple and elegant Pomodoro timer to help you manage your wor
 - **Auto-Start**: Option to auto-start the next session.
 - **Task Management**: Add, complete, and manage tasks.
 - **Responsive Design**: Works well on both desktop and mobile devices.
+- **Dark Mode**: Toggle between light and dark modes for a comfortable viewing experience.
 
 ## Usage
 
@@ -17,6 +18,7 @@ Pomidor Timer is a simple and elegant Pomodoro timer to help you manage your wor
 3. **Settings**: Click the "Settings" button to customize the timer settings.
 4. **Add Tasks**: Enter a task in the input field and click "Add Task" to add it to the task list.
 5. **Complete Tasks**: Click the checkmark button next to a task to mark it as completed.
+6. **Toggle Dark Mode**: Click the "Toggle Dark Mode" button to switch between light and dark modes.
 
 ## Installation
 
