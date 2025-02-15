@@ -35,7 +35,9 @@
             align-items: flex-start;
             width: 90%;
             max-width: 1200px;
-            margin: auto;
+            margin: 80px auto 20px auto; /* Added top margin to prevent cut-off */
+            min-height: calc(100vh - 100px);
+            padding-bottom: 60px;
         }
 
         .container {
@@ -304,6 +306,7 @@
                 height: auto;
                 min-height: 100vh;
                 margin: 0;
+                padding-bottom: 200px;  /* Increased padding for mobile */
             }
 
             .container, .tasks {
@@ -321,6 +324,13 @@
             .task-input-container input {
                 width: 100%;
                 box-sizing: border-box;
+                height: 50px;  /* Increased height for better touch targets */
+                font-size: 16px;  /* Better size for mobile */
+            }
+
+            .task-input-container select {
+                height: 50px;  /* Increased height for better touch targets */
+                font-size: 16px;  /* Better size for mobile */
             }
 
             .tasks input {
@@ -443,7 +453,7 @@
 
         .task-input-container {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-columns: 1fr;  /* Changed from 2fr 1fr 1fr to 1fr */
             gap: 15px;
             margin-bottom: 20px;
             background: rgba(255, 255, 255, 0.2);
@@ -554,20 +564,23 @@
             .social-links {
                 padding: 8px 15px;
                 font-size: 0.8rem;
+                bottom: 20px;  /* Adjusted to prevent overlap */
             }
         }
 
         .statistics-panel {
-            position: fixed;
-            bottom: 80px;
-            left: 20px;
+            position: static; /* Changed from fixed to static */
+            margin: 20px 0;
             background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
+            padding: 15px 25px;
             border-radius: 15px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            min-width: 200px;
-            z-index: 1000;
+            width: 100%;
             backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
         }
 
         body.dark-mode .statistics-panel {
@@ -786,7 +799,7 @@
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             .main-container {
-                margin-top: 60px;
+                margin-top: 100px; /* Increased top margin for mobile */
             }
 
             .dark-mode-button {
@@ -821,24 +834,21 @@
             }
 
             .statistics-panel {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                border-radius: 15px 15px 0 0;
-                padding: 15px;
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-                text-align: center;
+                margin: 15px 0;
+                padding: 12px;
             }
 
             .statistics-panel h4 {
-                grid-column: 1/-1;
+                display: none; /* Hide the header on mobile */
+            }
+
+            .statistics-panel p {
+                font-size: 0.85rem;
+                text-align: center;
             }
 
             .credits {
-                bottom: 130px;
+                bottom: 140px;  /* Adjusted position */
             }
 
             /* Show shortcuts as a mobile menu button */
@@ -1223,6 +1233,13 @@
                 <label for="soundVolume">Sound Volume:</label>
                 <input type="range" id="soundVolume" min="0" max="100" value="50">
             </div>
+            <!-- Move statistics panel here -->
+            <div class="statistics-panel" id="statistics">
+                <h4>📊 Statistics</h4>
+                <p>🍅 Pomodoros: <span id="completedPomodoros">0</span></p>
+                <p>✓ Tasks Done: <span id="completedTasks">0</span></p>
+                <p>⏱️ Focus Time: <span id="totalFocusTime">0</span> mins</p>
+            </div>
         </div>
         
         <div class="tasks">
@@ -1242,13 +1259,6 @@
             <h3>Tasks</h3>
             <ul id="taskList"></ul>
         </div>
-    </div>
-
-    <div class="statistics-panel" id="statistics">
-        <h4>📊 Statistics</h4>
-        <p>🍅 Pomodoros: <span id="completedPomodoros">0</span></p>
-        <p>✓ Tasks Done: <span id="completedTasks">0</span></p>
-        <p>⏱️ Focus Time: <span id="totalFocusTime">0</span> mins</p>
     </div>
 
     <div class="fullscreen-timer" id="fullscreenTimer">
