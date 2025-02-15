@@ -562,48 +562,72 @@
 
         @media (max-width: 768px) {
             .social-links {
-                padding: 8px 15px;
-                font-size: 0.8rem;
-                bottom: 20px;  /* Adjusted to prevent overlap */
+                display: none; /* Hide social links on mobile */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .social-links {
+                display: none; /* Hide social links on mobile */
             }
         }
 
         .statistics-panel {
-            position: static; /* Changed from fixed to static */
-            margin: 20px 0;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 15px 25px;
             border-radius: 15px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            backdrop-filter: blur(5px);
+        }
+
+        .statistics-panel h4 {
+            margin: 0 0 15px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .statistics-panel p {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            margin: 10px 0;
+            padding: 8px;
+            background: rgba(130, 234, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .statistics-panel span {
+            font-weight: bold;
+            color: #82EAFF;
         }
 
         body.dark-mode .statistics-panel {
             background: rgba(51, 51, 51, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .statistics-panel h4 {
-            margin: 0 0 10px 0;
-            color: #333;
-            font-size: 1.1rem;
         }
 
         body.dark-mode .statistics-panel h4 {
             color: #fff;
         }
 
-        .statistics-panel p {
-            margin: 5px 0;
-            font-size: 0.9rem;
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
+        body.dark-mode .statistics-panel p {
+            background: rgba(130, 234, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .statistics-panel {
+                position: static;
+                margin: 15px auto;
+                padding: 12px;
+                width: 90%;
+            }
+
+            .statistics-panel p {
+                font-size: 0.9rem;
+                padding: 6px 8px;
+            }
         }
 
         .task-item {
@@ -1189,6 +1213,118 @@
                 background: rgba(51, 51, 51, 0.98);
             }
         }
+
+        @media (max-width: 768px) {
+            .import-export {
+                display: none; /* Hide import/export on mobile */
+            }
+
+            .statistics-panel {
+                display: none; /* Hide statistics on mobile */
+            }
+
+            .credits {
+                display: none; /* Hide credits on mobile */
+            }
+
+            .tasks {
+                margin: 10px auto; /* Center the tasks container */
+                max-width: 90%; /* Limit width */
+                overflow-x: hidden; /* Prevent horizontal scrolling */
+                -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+                scrollbar-width: none; /* Hide scrollbar Firefox */
+            }
+
+            .main-container {
+                align-items: center; /* Center content */
+                padding: 10px;
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+                margin: 0;
+            }
+
+            .container, .tasks {
+                width: 90%; /* Make containers consistent width */
+                margin: 10px auto; /* Center containers */
+                padding: 15px;
+            }
+
+            .task-input-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 15px;
+                gap: 10px;
+                margin: 0 auto;
+            }
+
+            .task-input-container input,
+            .task-input-container select {
+                width: 100%;
+                max-width: 300px;
+                height: 45px;
+                font-size: 16px;
+                margin: 0 auto;
+            }
+
+            .task-actions {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                gap: 10px;
+                margin: 15px 0;
+            }
+
+            .task-actions button {
+                min-width: 120px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tasks {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 90%;
+                margin: 10px auto;
+            }
+
+            .task-input-container {
+                width: 100%;
+                max-width: 300px;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                margin: 0 auto;
+            }
+
+            .task-input-container input,
+            .task-input-container select {
+                width: 100%;
+                height: 45px;
+                margin: 0;
+                padding: 8px 12px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+
+            .task-actions {
+                width: 100%;
+                max-width: 300px;
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+                margin: 10px auto;
+            }
+
+            .task-actions button {
+                flex: 1;
+                min-height: 45px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1272,7 +1408,7 @@
     </div>
 
     <div class="social-links">
-        <a href="https://x.com/@ishanasati.me" target="_blank">
+        <a href="https://x.com/@ishanasati" target="_blank">
             <i>𝕏</i> Twitter
         </a>
         <a href="https://github.com/ishanasati" target="_blank">
@@ -1543,31 +1679,25 @@
 
         // Add statistics update function
         function updateStatistics() {
-            const stats = JSON.parse(localStorage.getItem('statistics') || 
-                '{"pomodoros":0,"focusTime":0,"dailyStreak":0,"lastActive":""}');
+            const stats = JSON.parse(localStorage.getItem('statistics') || '{"pomodoros":0,"focusTime":0,"completedTasks":0}');
             
-            const today = new Date().toDateString();
-            if (stats.lastActive !== today) {
-                if (new Date(stats.lastActive).toDateString() === 
-                    new Date(Date.now() - 86400000).toDateString()) {
-                    stats.dailyStreak++;
-                } else {
-                    stats.dailyStreak = 1;
-                }
-                stats.lastActive = today;
-            }
-
+            // Update completed tasks count
             const completedTasks = document.querySelectorAll('.tasks li.completed').length;
+            stats.completedTasks = completedTasks;
             
-            elements.statistics.pomodoros.textContent = stats.pomodoros;
-            elements.statistics.focusTime.textContent = stats.focusTime;
-            elements.statistics.tasks.textContent = completedTasks;
+            // Update the display
+            elements.statistics.pomodoros.textContent = stats.pomodoros || 0;
+            elements.statistics.tasks.textContent = stats.completedTasks || 0;
+            elements.statistics.focusTime.textContent = stats.focusTime || 0;
             
-            localStorage.setItem('statistics', JSON.stringify({
-                ...stats,
-                completedTasks
-            }));
+            // Save updated stats
+            localStorage.setItem('statistics', JSON.stringify(stats));
         }
+
+        // Add this to ensure statistics are updated when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStatistics();
+        });
 
         // Initialize statistics on load
         updateStatistics();
