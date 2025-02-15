@@ -1,68 +1,64 @@
-# Pomidor Timer
+# Pomidor Timer 🍅
 
-Pomidor Timer is a simple and elegant Pomodoro timer to help you manage your work and break sessions effectively. It includes customizable settings and task management features.
+A sleek, modern Pomodoro timer application designed to enhance your productivity and time management.
 
-## Features
+![Pomidor Timer](https://raw.githubusercontent.com/IshanAsati/pomidor/main/LOGO.png)
 
-- **Pomodoro Timer**: Default 25-minute work sessions and 5-minute breaks
-- **Customizable Settings**: Adjust work duration, break duration, long break duration, and sessions before a long break
-- **Auto-Start**: Option to auto-start the next session
-- **Task Management**: Add, complete, and manage tasks
-- **Responsive Design**: Works well on both desktop and mobile devices
-- **Dark Mode**: Toggle between light and dark modes for a comfortable viewing experience
-- **Local Storage**: Tasks persist between sessions
-- **Audio Notifications**: Sound alerts when sessions complete
-- **Progress Bar**: Visual indication of session progress
-- **Accessibility**: High contrast design and keyboard navigation support
+## ✨ Features
 
-## Technical Features
+- ⏱️ Flexible time management
+  - Customizable work intervals (25/45/60 min)
+  - Adjustable break durations (5/10/15 min)
+  - Long break options after completed cycles
+- 📋 Task Management
+  - Priority levels (High/Medium/Low)
+  - Custom categories and labels
+  - Task completion tracking
+- 🎨 User Experience
+  - Dark/Light theme support
+  - Desktop notifications
+  - Custom sound alerts
+  - Minimalist, distraction-free interface
+- 📊 Progress Tracking
+  - Daily/Weekly/Monthly statistics
+  - Focus time analytics
+  - Productivity trends
 
-- Pure JavaScript implementation with no external dependencies
-- Responsive CSS using Flexbox layout
-- Local storage integration for task persistence
-- Custom animations and transitions
-- Mobile-first design approach
+## 🚀 Quick Start
 
-## Settings
+1. Visit [Pomidor Timer](https://pomidor.ishanasati.me)
+2. Configure your preferred timer settings
+3. Add your tasks and priorities
+4. Start your productive journey!
 
-- **Work Duration**: Set work session length (1-60 minutes)
-- **Break Duration**: Set short break length (1-30 minutes)
-- **Long Break Duration**: Set long break length (1-60 minutes)
-- **Sessions Before Long Break**: Configure number of sessions (1-10)
-- **Auto-Start**: Toggle automatic start of next session
+## 💻 Local Development
 
-## Usage
+```bash
+git clone https://github.com/ishanasati/pomidor.git
+cd pomidor
+# Open index.html in your browser
+```
 
-1. **Start Timer**: Click the "Start" button to begin the timer
-2. **Stop Timer**: Click the "Stop" button to pause the timer
-3. **Reset Timer**: Click the "Reset" button to restart the current session
-4. **Settings**: Click the "Settings" button to customize the timer settings
-5. **Task Management**:
-   - Add tasks using the input field
-   - Mark tasks as complete with the checkmark button
-   - Remove tasks with the delete button
-   - Clear all tasks using the "Clear All" button
-6. **Dark Mode**: Toggle using the button in the top-right corner
+## 🤝 Contributing
 
-## Installation
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/IshanAsati/pomidor.git
-    ```
-2. Open `index.html` in your web browser
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
 
-## Online Version
+## 📝 License
 
-Access Pomidor Timer online at [https://ishanasati.github.io/pomidor/](https://ishanasati.github.io/pomidor/)
+[MIT License](LICENSE) © Ishan Asati
 
-## Browser Support
+## 🔗 Connect
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+[![Twitter](https://img.shields.io/twitter/follow/ishanasati_me?style=social)](https://twitter.com/ishanasati_me)
+[![GitHub](https://img.shields.io/github/followers/ishanasati?style=social)](https://github.com/ishanasati)
+[![Portfolio](https://img.shields.io/badge/Website-ishanasati.me-blue)](https://ishanasati.me)
 
-## License
+---
 
-This project is licensed under the MIT License.
+Made with ❤️ by [Ishan Asati](https://ishanasati.me)
