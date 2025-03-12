@@ -2074,6 +2074,64 @@
                 font-size: 1.3rem;
             }
         }
+
+        /* Adjust body to ensure proper centering and visibility */
+        body {
+            padding-top: 80px; /* Add space at the top */
+            padding-bottom: 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Changed from center to flex-start */
+            overflow-x: hidden;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        
+        /* Fix main container positioning */
+        .main-container {
+            margin-top: 20px;
+            margin-bottom: 40px;
+            max-height: calc(100vh - 160px); /* Account for body padding */
+            overflow-y: visible;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Ensure the dark mode button is visible and accessible */
+        .dark-mode-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+        }
+        
+        /* Ensure containers have proper height */
+        .container, .tasks, .spotify-container {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        /* Refined scrollbar style */
+        .container::-webkit-scrollbar, 
+        .tasks::-webkit-scrollbar, 
+        .spotify-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .container::-webkit-scrollbar-thumb, 
+        .tasks::-webkit-scrollbar-thumb, 
+        .spotify-container::-webkit-scrollbar-thumb {
+            background: rgba(130, 234, 255, 0.5);
+            border-radius: 3px;
+        }
+
+        body.dark-mode .container::-webkit-scrollbar-thumb, 
+        body.dark-mode .tasks::-webkit-scrollbar-thumb, 
+        body.dark-mode .spotify-container::-webkit-scrollbar-thumb {
+            background: rgba(80, 80, 80, 0.8);
+        }
     </style>
     <script src="https://raw.githubusercontent.com/IshanAsati/pomidor/refs/heads/main/spotify.js" defer></script>
 </head>
