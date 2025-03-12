@@ -1371,6 +1371,401 @@
             transform: scale(1.1);
             filter: brightness(1.1);
         }
+
+        /* Enhanced settings styles */
+        .settings {
+            font-size: 1rem;
+            color: #333333;
+            display: none;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        body.dark-mode .settings {
+            background: #333333;
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #82EAFF;
+            padding-bottom: 10px;
+        }
+
+        .settings-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        body.dark-mode .settings-header h3 {
+            color: #fff;
+        }
+
+        .settings-header button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #555;
+        }
+
+        body.dark-mode .settings-header button {
+            color: #ddd;
+        }
+
+        .settings-group {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(130, 234, 255, 0.2);
+        }
+
+        .settings-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .settings-group-title {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        body.dark-mode .settings-group-title {
+            color: #aaa;
+        }
+
+        .settings label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .settings input[type="number"] {
+            width: 80px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid rgba(130, 234, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        body.dark-mode .settings input[type="number"] {
+            background-color: rgba(80, 80, 80, 0.8);
+            color: #fff;
+            border-color: rgba(130, 234, 255, 0.1);
+        }
+
+        /* Toggle switch styling */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #82EAFF;
+        }
+
+        body.dark-mode input:checked + .toggle-slider {
+            background-color: #536DFE;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Improved slider styling */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .volume-icon {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        body.dark-mode .volume-icon {
+            color: #aaa;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 5px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #82EAFF;
+            cursor: pointer;
+        }
+
+        body.dark-mode input[type="range"]::-webkit-slider-thumb {
+            background: #536DFE;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #82EAFF;
+            cursor: pointer;
+            border: none;
+        }
+
+        body.dark-mode input[type="range"]::-moz-range-thumb {
+            background: #536DFE;
+        }
+
+        /* Enhanced Timer Styling */
+        .timer-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .timer {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+            cursor: default;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body.dark-mode .timer {
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.1);
+        }
+
+        .fullscreen-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: rgba(130, 234, 255, 0.2);
+            color: #333;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .fullscreen-btn {
+            background: rgba(80, 80, 80, 0.5);
+            color: #fff;
+        }
+
+        .fullscreen-btn:hover {
+            transform: scale(1.1);
+            background: rgba(130, 234, 255, 0.5);
+        }
+
+        /* Fullscreen Mode */
+        .fullscreen-timer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #82EAFF;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .fullscreen-timer {
+            background: #222222;
+            color: #ffffff;
+        }
+
+        .fullscreen-timer.active {
+            display: flex;
+        }
+
+        .timer-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .large-timer {
+            font-size: 12rem;
+            margin-bottom: 40px;
+            font-weight: bold;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .large-timer {
+            text-shadow: 0 4px 20px rgba(255,255,255,0.1);
+        }
+
+        .large-progress-container {
+            width: 60vw;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+
+        .large-progress {
+            height: 20px;
+            background-color: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .large-progress .progress {
+            height: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        body.dark-mode .large-progress .progress {
+            background-color: #536DFE;
+        }
+
+        .exit-fullscreen {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 10px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .exit-fullscreen {
+            background: rgba(80,80,80,0.2);
+            color: #fff;
+        }
+
+        .exit-fullscreen:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .session-label {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .settings {
+                padding: 20px 15px;
+                max-width: none;
+            }
+
+            .settings label {
+                font-size: 0.9rem;
+            }
+
+            .timer {
+                font-size: 4rem;
+            }
+
+            .large-timer {
+                font-size: 5rem;
+                margin-bottom: 30px;
+            }
+
+            .large-progress-container {
+                width: 90vw;
+            }
+
+            .session-label {
+                font-size: 1.5rem;
+            }
+
+            .exit-fullscreen {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1382,9 +1777,12 @@
                 <h1>Pomidor</h1>
                 <p>Your personal Pomodoro timer</p>
             </div>
-            <div class="timer" id="timerDisplay">25:00</div>
-            <div class="progress-bar">
-                <div class="progress" id="progressBar"></div>
+            <div class="timer-container">
+                <div class="timer" id="timerDisplay">25:00</div>
+                <button class="fullscreen-btn" id="fullscreenButton" title="Enter Fullscreen Mode">⛶</button>
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar"></div>
+                </div>
             </div>
             <div class="button-container">
                 <button class="button" id="startButton">Start</button>
@@ -1393,22 +1791,53 @@
             </div>
             <button class="settings-button" id="settingsButton">Settings</button>
             <div class="settings" id="settings">
-                <label for="workDuration">Work (mins):</label>
-                <input type="number" id="workDuration" value="25" min="1" max="60">
-                <label for="breakDuration">Break (mins):</label>
-                <input type="number" id="breakDuration" value="5" min="1" max="30">
-                <label for="longBreakDuration">Long Break (mins):</label>
-                <input type="number" id="longBreakDuration" value="15" min="1" max="60">
-                <label for="sessionsBeforeLongBreak">Sessions before long break:</label>
-                <input type="number" id="sessionsBeforeLongBreak" value="4" min="1" max="10">
-                <label for="autoStartNextSession">Auto-start next session:</label>
-                <input type="checkbox" id="autoStartNextSession">
-                <label for="notificationsEnabled">Enable Notifications:</label>
-                <input type="checkbox" id="notificationsEnabled">
-                <label for="soundEnabled">Enable Sound:</label>
-                <input type="checkbox" id="soundEnabled" checked>
-                <label for="soundVolume">Sound Volume:</label>
-                <input type="range" id="soundVolume" min="0" max="100" value="50">
+                <div class="settings-header">
+                    <h3>Timer Settings</h3>
+                    <button id="closeSettings">✕</button>
+                </div>
+                
+                <div class="settings-group">
+                    <h4 class="settings-group-title">Time Durations</h4>
+                    <label for="workDuration">Work Duration (mins): <input type="number" id="workDuration" value="25" min="1" max="60"></label>
+                    <label for="breakDuration">Break Duration (mins): <input type="number" id="breakDuration" value="5" min="1" max="30"></label>
+                    <label for="longBreakDuration">Long Break Duration (mins): <input type="number" id="longBreakDuration" value="15" min="1" max="60"></label>
+                    <label for="sessionsBeforeLongBreak">Sessions before long break: <input type="number" id="sessionsBeforeLongBreak" value="4" min="1" max="10"></label>
+                </div>
+                
+                <div class="settings-group">
+                    <h4 class="settings-group-title">Behavior</h4>
+                    <label for="autoStartNextSession">
+                        Auto-start next session:
+                        <span class="toggle-switch">
+                            <input type="checkbox" id="autoStartNextSession">
+                            <span class="toggle-slider"></span>
+                        </span>
+                    </label>
+                    <label for="notificationsEnabled">
+                        Enable Notifications:
+                        <span class="toggle-switch">
+                            <input type="checkbox" id="notificationsEnabled">
+                            <span class="toggle-slider"></span>
+                        </span>
+                    </label>
+                </div>
+                
+                <div class="settings-group">
+                    <h4 class="settings-group-title">Sound</h4>
+                    <label for="soundEnabled">
+                        Enable Sound:
+                        <span class="toggle-switch">
+                            <input type="checkbox" id="soundEnabled" checked>
+                            <span class="toggle-slider"></span>
+                        </span>
+                    </label>
+                    <label for="soundVolume">Sound Volume:</label>
+                    <div class="volume-control">
+                        <span class="volume-icon">🔈</span>
+                        <input type="range" id="soundVolume" min="0" max="100" value="50">
+                        <span class="volume-icon">🔊</span>
+                    </div>
+                </div>
             </div>
             <!-- Move statistics panel here -->
             <div class="statistics-panel" id="statistics">
@@ -1445,11 +1874,14 @@
 
     <div class="fullscreen-timer" id="fullscreenTimer">
         <div class="timer-content">
-            <div class="timer large-timer">25:00</div>
-            <div class="progress-bar large-progress">
-                <div class="progress"></div>
+            <div class="session-label" id="sessionLabel">Work Session</div>
+            <div class="timer large-timer" id="fullscreenTimerDisplay">25:00</div>
+            <div class="large-progress-container">
+                <div class="large-progress">
+                    <div class="progress" id="fullscreenProgressBar"></div>
+                </div>
             </div>
-            <button class="exit-fullscreen">Exit Full Screen (Esc)</button>
+            <button class="exit-fullscreen" id="exitFullscreen">Exit Full Screen (Esc)</button>
         </div>
     </div>
 
@@ -1473,6 +1905,12 @@
         const elements = {
             timer: document.getElementById('timerDisplay'),
             progress: document.getElementById('progressBar'),
+            fullscreenTimer: {
+                container: document.getElementById('fullscreenTimer'),
+                display: document.getElementById('fullscreenTimerDisplay'),
+                progress: document.getElementById('fullscreenProgressBar'),
+                sessionLabel: document.getElementById('sessionLabel')
+            },
             buttons: {
                 start: document.getElementById('startButton'),
                 stop: document.getElementById('stopButton'),
@@ -1480,7 +1918,10 @@
                 settings: document.getElementById('settingsButton'),
                 darkMode: document.getElementById('darkModeButton'),
                 addTask: document.getElementById('addTaskButton'),
-                clearTasks: document.getElementById('clearTasksButton')
+                clearTasks: document.getElementById('clearTasksButton'),
+                fullscreen: document.getElementById('fullscreenButton'),
+                exitFullscreen: document.getElementById('exitFullscreen'),
+                closeSettings: document.getElementById('closeSettings')
             },
             inputs: {
                 work: document.getElementById('workDuration'),
@@ -1513,7 +1954,8 @@
             timeLeft: parseInt(elements.inputs.work.value) * 60,
             interval: null,
             sessionCount: 0,
-            isRunning: false  // Add this line to track timer state
+            isRunning: false,  // Add this line to track timer state
+            startTime: null  // Add this to track when timer was started
         };
 
         // Add statistics state
@@ -1536,15 +1978,31 @@
                     parseInt(elements.inputs.break.value) * 60;
                 const progress = (timer.timeLeft / duration) * 100;
                 elements.progress.style.width = `${progress}%`;
+                
+                // Update fullscreen progress bar if visible
+                if (elements.fullscreenTimer.container.classList.contains('active')) {
+                    elements.fullscreenTimer.progress.style.width = `${progress}%`;
+                }
+            },
+            updateDisplay: () => {
+                const timeFormatted = timerFunctions.formatTime(timer.timeLeft);
+                elements.timer.textContent = timeFormatted;
+                elements.fullscreenTimer.display.textContent = timeFormatted;
+                
+                const sessionType = timer.isWorking ? "Work Session" : 
+                    (timer.sessionCount % parseInt(elements.inputs.sessions.value) === 0) ? 
+                    "Long Break" : "Break";
+                elements.fullscreenTimer.sessionLabel.textContent = sessionType;
             },
             start: () => {
                 elements.buttons.start.disabled = true;
                 elements.buttons.stop.disabled = false;
                 timer.isRunning = true;  // Add this line
+                timer.startTime = Date.now(); // Track when the timer was started
 
                 timer.interval = setInterval(() => {
                     timer.timeLeft--;
-                    elements.timer.textContent = timerFunctions.formatTime(timer.timeLeft);
+                    timerFunctions.updateDisplay();
                     timerFunctions.updateProgressBar();
 
                     if (timer.timeLeft <= 0) {
@@ -1575,17 +2033,34 @@
                         (timer.sessionCount % parseInt(elements.inputs.sessions.value) === 0 && !timer.isWorking) ?
                             parseInt(elements.inputs.longBreak.value) * 60 :
                             parseInt(elements.inputs.break.value) * 60;
-                    elements.timer.textContent = timerFunctions.formatTime(timer.timeLeft);
+                    timerFunctions.updateDisplay();
                     timerFunctions.updateProgressBar();
                 }
             },
             handleTimerComplete: () => {
                 clearInterval(timer.interval);
                 elements.audio.play();
+                
+                // Only increment pomodoro count and focus time if completing a work session
+                if (timer.isWorking) {
+                    // Work session just completed
+                    stats.pomodoros++;
+                    // Calculate actual time spent based on work duration setting
+                    const workDuration = parseInt(elements.inputs.work.value);
+                    stats.focusTime += workDuration;
+                    
+                    // Update localStorage and display
+                    localStorage.setItem('pomodoros', stats.pomodoros);
+                    localStorage.setItem('focusTime', stats.focusTime);
+                    
+                    // Update the display immediately
+                    elements.statistics.pomodoros.textContent = stats.pomodoros;
+                    elements.statistics.focusTime.textContent = stats.focusTime;
+                }
+                
                 timer.isWorking = !timer.isWorking;
                 timer.sessionCount++;
-                updateStatistics(); // Add this line
-
+                
                 if (timer.sessionCount % parseInt(elements.inputs.sessions.value) === 0 && !timer.isWorking) {
                     timer.timeLeft = parseInt(elements.inputs.longBreak.value) * 60;
                 } else {
@@ -1656,9 +2131,22 @@
                 const completeBtn = document.createElement('button');
                 completeBtn.innerHTML = '✓';
                 completeBtn.onclick = () => {
+                    const wasCompleted = li.classList.contains('completed');
                     li.classList.toggle('completed');
+                    
+                    // Only increment completed tasks counter when task is first completed
+                    if (!wasCompleted && li.classList.contains('completed')) {
+                        stats.completedTasks++;
+                        localStorage.setItem('completedTasks', stats.completedTasks);
+                        elements.statistics.tasks.textContent = stats.completedTasks;
+                    } else if (wasCompleted && !li.classList.contains('completed')) {
+                        // Decrement if task is uncompleted
+                        stats.completedTasks--;
+                        localStorage.setItem('completedTasks', stats.completedTasks);
+                        elements.statistics.tasks.textContent = stats.completedTasks;
+                    }
+                    
                     taskFunctions.save();
-                    updateStatistics();
                 };
 
                 const deleteBtn = document.createElement('button');
@@ -1695,24 +2183,12 @@
             }
         };
 
-        // Update the updateStatistics function
+        // Simplified updateStatistics function - we'll update stats in real-time now
         const updateStatistics = () => {
-            const tasks = Array.from(elements.taskList.children);
-            const completedTasks = tasks.filter(task => task.classList.contains('completed')).length;
-            
-            stats.completedTasks = completedTasks;
-            stats.pomodoros = timer.sessionCount;
-            stats.focusTime = Math.floor(timer.sessionCount * parseInt(elements.inputs.work.value));
-            
-            // Update display
+            // Update display elements with current stats
             elements.statistics.tasks.textContent = stats.completedTasks;
             elements.statistics.pomodoros.textContent = stats.pomodoros;
             elements.statistics.focusTime.textContent = stats.focusTime;
-            
-            // Save to localStorage
-            localStorage.setItem('pomodoros', stats.pomodoros);
-            localStorage.setItem('completedTasks', stats.completedTasks);
-            localStorage.setItem('focusTime', stats.focusTime);
         };
 
         // Update timer initialization to load saved session count
@@ -1761,6 +2237,57 @@
 
         // Initialize tasks
         taskFunctions.load();
+
+        // Fullscreen functionality
+        const fullscreenFunctions = {
+            enter: () => {
+                elements.fullscreenTimer.container.classList.add('active');
+                timerFunctions.updateDisplay();
+                timerFunctions.updateProgressBar();
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            },
+            
+            exit: () => {
+                elements.fullscreenTimer.container.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        };
+
+        // Additional event listeners
+        elements.buttons.fullscreen.addEventListener('click', fullscreenFunctions.enter);
+        elements.buttons.exitFullscreen.addEventListener('click', fullscreenFunctions.exit);
+        elements.buttons.closeSettings.addEventListener('click', () => {
+            elements.settings.style.display = 'none';
+        });
+
+        // Handle ESC key to exit fullscreen
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && elements.fullscreenTimer.container.classList.contains('active')) {
+                fullscreenFunctions.exit();
+            }
+        });
+
+        // Modify existing settings button click
+        elements.buttons.settings.onclick = () => {
+            elements.settings.style.display = elements.settings.style.display === 'none' ? 'block' : 'none';
+        };
+
+        // Update display function calls to maintain sync between normal and fullscreen displays
+        timerFunctions.updateTimerDisplay = () => {
+            if (!timer.isRunning) {
+                timer.timeLeft = timer.isWorking ? 
+                    parseInt(elements.inputs.work.value) * 60 : 
+                    (timer.sessionCount % parseInt(elements.inputs.sessions.value) === 0 && !timer.isWorking) ?
+                        parseInt(elements.inputs.longBreak.value) * 60 :
+                        parseInt(elements.inputs.break.value) * 60;
+                
+                timerFunctions.updateDisplay();
+                timerFunctions.updateProgressBar();
+            }
+        };
+
+        // Initialize fullscreen display
+        timerFunctions.updateDisplay();
     </script>
 </body>
 </html>

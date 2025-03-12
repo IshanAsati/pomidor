@@ -2,34 +2,51 @@
 
 A sleek, modern Pomodoro timer application designed to enhance your productivity and time management.
 
-![Pomidor Timer](https://raw.githubusercontent.com/IshanAsati/pomidor/main/LOGO.png)
+[![Pomidor Timer](https://raw.githubusercontent.com/IshanAsati/pomidor/main/logo.png)](https://pomidor.ishanasati.me)
 
 ## ✨ Features
 
-- ⏱️ Flexible time management
-  - Customizable work intervals (25/45/60 min)
-  - Adjustable break durations (5/10/15 min)
-  - Long break options after completed cycles
+- ⏱️ Customizable Timer
+  - Adjustable work sessions (1-60 minutes)
+  - Configurable short breaks (1-30 minutes)
+  - Long break options after customizable number of sessions
+  - Auto-start option for seamless transitions
 - 📋 Task Management
   - Priority levels (High/Medium/Low)
-  - Custom categories and labels
+  - Custom category labeling
   - Task completion tracking
-- 🎨 User Experience
-  - Dark/Light theme support
-  - Desktop notifications
-  - Custom sound alerts
-  - Minimalist, distraction-free interface
-- 📊 Progress Tracking
-  - Daily/Weekly/Monthly statistics
-  - Focus time analytics
-  - Productivity trends
+  - Clear task organization
+- 🎨 Enhanced User Experience
+  - Dark/Light theme toggle
+  - Fullscreen focus mode
+  - Clean, distraction-free interface
+  - Modern toggle switches and controls
+- 📊 Productivity Statistics
+  - Completed pomodoros counter
+  - Finished tasks tracking
+  - Total focus time calculation
+- 🎵 Sound Notifications
+  - Customizable volume control
+  - Session completion alerts
+  - Toggle sounds on/off
+- 📱 Responsive Design
+  - Works on desktop and mobile devices
+  - Optimized interface for all screen sizes
+  - Touch-friendly controls
 
 ## 🚀 Quick Start
 
 1. Visit [Pomidor Timer](https://pomidor.ishanasati.me)
 2. Configure your preferred timer settings
 3. Add your tasks and priorities
-4. Start your productive journey!
+4. Start the timer and boost your productivity!
+
+## 💡 How to Use
+
+1. **Timer Settings**: Click the "Settings" button to customize your work/break durations
+2. **Task Management**: Add tasks with priorities and categories in the task panel
+3. **Focus Mode**: Use the fullscreen button for distraction-free focus sessions
+4. **Track Progress**: Monitor your productivity with the built-in statistics panel
 
 ## 💻 Local Development
 
