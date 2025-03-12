@@ -2,7 +2,11 @@
 
 A sleek, modern Pomodoro timer application designed to enhance your productivity and time management.
 
-[![Pomidor Timer](https://raw.githubusercontent.com/IshanAsati/pomidor/main/logo.png)](https://pomidor.ishanasati.me)
+<p align="center">
+  <a href="https://pomidor.ishanasati.me">
+    <img src="https://raw.githubusercontent.com/IshanAsati/pomidor/main/logo.png" alt="Pomidor Timer" width="200" style="border-radius: 50%;">
+  </a>
+</p>
 
 ## ✨ Features
 
@@ -72,7 +76,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## 🔗 Connect
 
-[![Twitter](https://img.shields.io/twitter/follow/ishanasati_me?style=social)](https://twitter.com/ishanasati_me)
+[![Twitter](https://img.shields.io/twitter/follow/ishanasati?style=social)](https://twitter.com/ishanasati)
 [![GitHub](https://img.shields.io/github/followers/ishanasati?style=social)](https://github.com/ishanasati)
 [![Portfolio](https://img.shields.io/badge/Website-ishanasati.me-blue)](https://ishanasati.me)
 
