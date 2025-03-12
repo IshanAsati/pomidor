@@ -1567,6 +1567,18 @@
                 elements.buttons.start.disabled = false;
                 elements.buttons.stop.disabled = true;
             },
+            updateTimerDisplay: () => {
+                // New function to update timer display based on current settings
+                if (!timer.isRunning) {
+                    timer.timeLeft = timer.isWorking ? 
+                        parseInt(elements.inputs.work.value) * 60 : 
+                        (timer.sessionCount % parseInt(elements.inputs.sessions.value) === 0 && !timer.isWorking) ?
+                            parseInt(elements.inputs.longBreak.value) * 60 :
+                            parseInt(elements.inputs.break.value) * 60;
+                    elements.timer.textContent = timerFunctions.formatTime(timer.timeLeft);
+                    timerFunctions.updateProgressBar();
+                }
+            },
             handleTimerComplete: () => {
                 clearInterval(timer.interval);
                 elements.audio.play();
@@ -1738,8 +1750,17 @@
             }
         });
             
-                    // Initialize tasks
-                    taskFunctions.load();
-                </script>
-        </body>
+        // Add these event listeners for settings changes
+        elements.inputs.work.addEventListener('change', timerFunctions.updateTimerDisplay);
+        elements.inputs.break.addEventListener('change', timerFunctions.updateTimerDisplay);
+        elements.inputs.longBreak.addEventListener('change', timerFunctions.updateTimerDisplay);
+        elements.inputs.sessions.addEventListener('change', timerFunctions.updateTimerDisplay);
+
+        // Initialize timer display when page loads
+        timerFunctions.updateTimerDisplay();
+
+        // Initialize tasks
+        taskFunctions.load();
+    </script>
+</body>
 </html>
