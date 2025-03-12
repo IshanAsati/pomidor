@@ -30,32 +30,81 @@
         }
 
         .main-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            width: 95%; /* Increased from 90% */
-            max-width: 1600px; /* Increased from 1200px */
-            margin: 40px auto 20px auto; /* Reduced top margin */
+            display: grid;
+            grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr) minmax(250px, 0.8fr);
+            grid-gap: 20px;
+            width: 95%;
+            max-width: 1800px;
+            margin: 40px auto;
             min-height: calc(100vh - 80px);
-            padding-bottom: 40px;
-            gap: 40px; /* Increased gap between containers */
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            padding: 0 20px 40px;
         }
 
         .container {
+            grid-column: 1;
+            justify-self: stretch;
+            align-self: flex-start;
+            height: auto;
+            width: auto;
+            margin: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: #fff;
-            padding: 40px; /* Increased padding */
-            border-radius: 20px; /* Increased border radius */
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
-            text-align: center;
-            width: 100%;
-            max-width: 500px; /* Increased from 400px */
-            margin: 10px;
-            height: fit-content; /* Adjust height based on content */
+        }
+
+        .tasks {
+            grid-column: 2;
+            justify-self: stretch;
+            align-self: flex-start;
+            height: calc(100vh - 80px);
+            width: auto;
+            margin: 0;
+            display: block;
+            order: unset;
+            flex-grow: unset;
+        }
+
+        .spotify-container {
+            grid-column: 3;
+            justify-self: stretch;
+            align-self: flex-start;
+            height: auto;
+            width: auto;
+            margin: 0;
+            order: unset;
+        }
+
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .container {
+                grid-column: 1;
+                grid-row: 1;
+            }
+            
+            .tasks {
+                grid-column: 2;
+                grid-row: 1;
+            }
+            
+            .spotify-container {
+                grid-column: 1 / span 2;
+                grid-row: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .container, .tasks, .spotify-container {
+                width: 100%;
+                margin-bottom: 20px;
+            }
         }
 
         body.dark-mode .container {
