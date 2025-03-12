@@ -6,7 +6,7 @@
 class SpotifyController {
     constructor() {
         // Spotify API credentials
-        this.clientId = '34865f399330400fac550894aaf887d6'; // TODO: Add your Spotify Client ID here
+        this.clientId = '34865f399330400fac550894aaf887d6'; // TODO: Add your Spotify Client ID here --> done
         this.redirectUri = window.location.origin + window.location.pathname;
         
         // State

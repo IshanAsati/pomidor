@@ -31,51 +31,40 @@
 
         .main-container {
             display: grid;
-            grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr) minmax(250px, 0.8fr);
-            grid-gap: 20px;
+            grid-template-columns: 350px minmax(350px, 1fr) 300px;
+            gap: 20px;
             width: 95%;
             max-width: 1800px;
             margin: 40px auto;
-            min-height: calc(100vh - 80px);
-            padding: 0 20px 40px;
+            min-height: calc(100vh - 100px);
+            padding: 0;
+            align-items: start;
         }
 
-        .container {
-            grid-column: 1;
-            justify-self: stretch;
-            align-self: flex-start;
+        .container, .tasks, .spotify-container {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            padding: 20px;
             height: auto;
-            width: auto;
+            width: 100%;
+            box-sizing: border-box;
             margin: 0;
-            display: flex;
-            flex-direction: column;
+            overflow-y: auto;
+            max-height: calc(100vh - 100px);
         }
 
-        .tasks {
-            grid-column: 2;
-            justify-self: stretch;
-            align-self: flex-start;
-            height: calc(100vh - 80px);
-            width: auto;
-            margin: 0;
-            display: block;
-            order: unset;
-            flex-grow: unset;
-        }
-
-        .spotify-container {
-            grid-column: 3;
-            justify-self: stretch;
-            align-self: flex-start;
-            height: auto;
-            width: auto;
-            margin: 0;
-            order: unset;
+        body.dark-mode .container, 
+        body.dark-mode .tasks, 
+        body.dark-mode .spotify-container {
+            background: #333;
+            color: #fff;
         }
 
         @media (max-width: 1200px) {
             .main-container {
                 grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
             }
             
             .container {
@@ -89,21 +78,38 @@
             }
             
             .spotify-container {
-                grid-column: 1 / span 2;
+                grid-column: 1 / -1;
                 grid-row: 2;
             }
         }
 
         @media (max-width: 768px) {
             .main-container {
-                display: flex;
-                flex-direction: column;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                gap: 15px;
                 padding: 10px;
+                margin: 20px auto;
+            }
+            
+            .container {
+                grid-column: 1;
+                grid-row: 1;
+            }
+            
+            .tasks {
+                grid-column: 1;
+                grid-row: 2;
+            }
+            
+            .spotify-container {
+                grid-column: 1;
+                grid-row: 3;
             }
             
             .container, .tasks, .spotify-container {
+                max-height: none;
                 width: 100%;
-                margin-bottom: 20px;
             }
         }
 
