@@ -12,134 +12,56 @@
             transition: all 0.3s ease;
         }
 
-        /* Fix body centering and positioning */
         body {
-            padding: 0;
+            font-family: 'Source Sans 3', sans-serif;
             margin: 0;
-            min-height: 100vh;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
-            box-sizing: border-box;
+            height: 100vh;
             background: #82EAFF;
             color: #333333;
-            font-family: 'Source Sans 3', sans-serif;
         }
-
         body.dark-mode {
             background: #222222;
             color: #E1D9D1;
         }
 
-        /* Improve main container */
         .main-container {
-            display: grid;
-            grid-template-columns: minmax(280px, 350px) minmax(280px, 400px) minmax(250px, 300px);
-            gap: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
             width: 90%;
-            max-width: 1600px;
-            min-height: 600px;
-            height: auto;
-            margin: 0 auto;
-            padding: 20px 0;
-            box-sizing: border-box;
-            position: relative;
-            place-items: start;
+            max-width: 1200px;
+            margin: 80px auto 20px auto; /* Added top margin to prevent cut-off */
+            min-height: calc(100vh - 100px);
+            padding-bottom: 60px;
         }
 
-        /* Fix container sizing and scrolling */
-        .container, .tasks, .spotify-container {
-            height: auto;
-            min-height: 600px;
-            max-height: 80vh;
-            width: 100%;
-            overflow: hidden; /* Hide scrollbars by default */
+        .container {
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
             background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            padding: 25px;
-            box-sizing: border-box;
-            position: relative;
-        }
-
-        /* Only show scrollbars when content overflows */
-        .tasks {
-            overflow-y: auto;
-        }
-
-        /* Task list takes remaining space */
-        .tasks ul {
-            flex-grow: 1;
-            overflow-y: auto;
-            margin-bottom: 0;
-            padding-bottom: 10px;
-        }
-
-        /* Better responsive behavior for all screen sizes */
-        @media (max-width: 1200px) {
-            .main-container {
-                grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
-                grid-template-rows: auto auto;
-                gap: 20px;
-            }
-            
-            .spotify-container {
-                grid-column: 1 / -1;
-                min-height: 400px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                grid-template-columns: 1fr;
-                width: 95%;
-                gap: 15px;
-                padding: 15px 0;
-            }
-
-            .container, .tasks, .spotify-container {
-                min-height: auto;
-                max-height: none;
-                padding: 15px;
-            }
-        }
-
-        /* Remove fixed heights */
-        .timer-container, .task-input-container {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
             width: 100%;
-            margin-bottom: 20px;
+            max-width: 400px;
+            margin: 20px;
         }
 
-        /* Dark mode container styling */
-        body.dark-mode .container, 
-        body.dark-mode .tasks, 
-        body.dark-mode .spotify-container {
-            background: #333;
-            color: #fff;
-        }
-        
-        /* Fix zoom behavior */
-        @media (max-width: 600px), (max-height: 700px) {
-            html {
-                font-size: 14px;
-            }
-            
-            .main-container {
-                transform: scale(0.95);
-                transform-origin: center top;
-            }
-            
-            .timer {
-                font-size: 4rem;
-            }
+        body.dark-mode .container {
+            background: #333333;
+            color: #ffffff;
         }
 
         .header h1 {
-            font-size: 3rem; /* Increased from 2.5rem */
+            font-size: 2.5rem;
             margin: 0;
             color: #222222;
         }
@@ -149,9 +71,8 @@
         }
 
         .header p {
-            font-size: 1.2rem; /* Increased from 1rem */
+            font-size: 1rem;
             color: #333333;
-            margin-top: 10px;
         }
 
         body.dark-mode .header p {
@@ -159,28 +80,24 @@
         }
 
         .timer {
-            font-size: 6rem; /* Increased from 5rem */
+            font-size: 4rem;
             font-weight: bold;
             color: #333333;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             animation: pulse 1s infinite;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.5s ease;
-            cursor: default;
         }
 
         body.dark-mode .timer {
             color: #ffffff;
-            text-shadow: 0 2px 10px rgba(255,255,255,0.1);
         }
 
         .progress-bar {
             width: 100%;
-            height: 20px; /* Increased height */
+            height: 15px;
             background-color: #e0e0e0;
-            border-radius: 15px; /* Increased border radius */
+            border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             position: relative;
         }
 
@@ -271,21 +188,17 @@
         }
 
         .tasks {
-            margin: 10px;
+            margin: 20px;
             text-align: left;
-            padding: 40px; /* Increased padding */
+            padding: 30px;
             background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 550px; /* Increased from 400px */
-            height: calc(100vh - 80px);
+            max-width: 400px;
+            height: 90vh;
             overflow-y: auto;
-            scrollbar-width: thin;
-            order: 2; /* Keep tasks as second item */
-            flex-grow: 1; /* Allow tasks to grow */
-            display: block !important; /* Force display */
-            visibility: visible !important; /* Ensure visibility */
+            scrollbar-width: none;
         }
 
         .tasks::-webkit-scrollbar {
@@ -298,8 +211,7 @@
         }
 
         .tasks h3 {
-            font-size: 1.6rem; /* Increased font size */
-            margin-bottom: 20px; /* Increased margin */
+            margin-bottom: 10px;
             animation: fadeIn 1s ease-in-out;
             color: #222222;
         }
@@ -315,9 +227,9 @@
 
         .tasks li {
             background: #f9f9f9;
-            padding: 15px; /* Increased padding */
+            padding: 10px;
             border-radius: 5px;
-            margin-bottom: 15px; /* Increased margin */
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -395,7 +307,6 @@
                 min-height: 100vh;
                 margin: 0;
                 padding-bottom: 200px;  /* Increased padding for mobile */
-                gap: 30px; /* Keep the mobile gap smaller */
             }
 
             .container, .tasks {
@@ -404,7 +315,6 @@
                 padding: 15px;
                 max-width: none;
                 box-sizing: border-box;
-                border-radius: 15px;
             }
 
             .task-input-container {
@@ -449,11 +359,11 @@
             }
 
             .timer {
-                font-size: 3.5rem; /* Keep mobile font size */
+                font-size: 3rem;
             }
 
             .header h1 {
-                font-size: 2rem; /* Keep mobile font size */
+                font-size: 2rem;
             }
 
             .button-container {
@@ -495,18 +405,6 @@
                 padding: 4px 8px;
                 font-size: 0.8rem;
             }
-
-            .progress-bar {
-                height: 15px; /* Keep mobile height */
-                margin-bottom: 20px;
-            }
-
-            .tasks {
-                height: auto;
-                max-height: calc(100vh - 480px);
-            }
-
-            /* Keep all the rest of the mobile-specific styles */
         }
 
         @keyframes fadeIn {
@@ -676,12 +574,12 @@
 
         .statistics-panel {
             width: 100%;
-            max-width: 500px; /* Increased from 350px */
-            margin: 30px auto; /* Increased margin */
-            padding: 30px; /* Increased padding */
+            max-width: 350px; /* Limit maximum width */
+            margin: 20px auto; /* Center horizontally */
+            padding: 20px;
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px; /* Increased border radius */
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
             box-sizing: border-box; /* Ensure padding is included in width */
         }
@@ -723,10 +621,10 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 15px; /* Increased padding */
+            padding: 10px;
             background: #f9f9f9;
             border-radius: 5px;
-            margin-bottom: 15px; /* Increased margin */
+            margin-bottom: 10px;
         }
 
         .task-content {
@@ -1022,8 +920,8 @@
         }
 
         .logo {
-            width: 100px; /* Increased from 80px */
-            height: 100px; /* Increased from 80px */
+            width: 80px;
+            height: 80px;
             margin-bottom: 15px;
             animation: float 3s infinite ease-in-out;
             border-radius: 50%;
@@ -1041,7 +939,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 40px; /* Increased margin */
+            margin-bottom: 30px;
         }
 
         .main-container {
@@ -1687,8 +1585,27 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 40px 0; /* Increased margin */
+            margin: 30px 0;
             position: relative;
+        }
+
+        .timer {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+            cursor: default;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body.dark-mode .timer {
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.1);
         }
 
         .fullscreen-btn {
@@ -1849,311 +1766,7 @@
                 font-size: 1rem;
             }
         }
-
-        /* Spotify Integration Styles */
-        .spotify-container {
-            width: 100%;
-            margin-top: 10px;
-            padding: 15px;
-            border-radius: 15px;
-            background: rgba(30, 215, 96, 0.1);
-            border: 1px solid rgba(30, 215, 96, 0.3);
-            order: 3; /* Position it after tasks */
-            align-self: flex-start;
-        }
-
-        body.dark-mode .spotify-container {
-            background: rgba(30, 215, 96, 0.05);
-            border: 1px solid rgba(30, 215, 96, 0.2);
-        }
-
-        .spotify-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .spotify-logo {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
-        }
-
-        .spotify-header h4 {
-            font-size: 1.2rem;
-            margin: 0;
-            flex-grow: 1;
-        }
-
-        .spotify-connect {
-            background-color: #1DB954;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .spotify-connect:hover {
-            background-color: #1ED760;
-            transform: scale(1.05);
-        }
-
-        .spotify-player {
-            display: none;
-            margin-top: 15px;
-        }
-
-        .player-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-
-        .control-button {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin: 0 10px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(30, 215, 96, 0.2);
-            transition: background-color 0.2s, transform 0.2s;
-        }
-
-        .control-button:hover {
-            background-color: rgba(30, 215, 96, 0.3);
-            transform: scale(1.1);
-        }
-
-        .track-info-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .album-art {
-            width: 60px;
-            height: 60px;
-            border-radius: 5px;
-            margin-right: 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .track-info {
-            flex-grow: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 0.9rem;
-        }
-
-        .spotify-settings {
-            margin-top: 15px;
-            border-top: 1px solid rgba(30, 215, 96, 0.2);
-            padding-top: 15px;
-        }
-
-        .spotify-settings h5 {
-            margin: 0 0 10px 0;
-            font-size: 1rem;
-        }
-
-        .playlist-selectors {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .playlist-selector {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .playlist-selector label {
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .playlist-selector select {
-            width: 100%;
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid rgba(30, 215, 96, 0.3);
-            background-color: white;
-        }
-
-        body.dark-mode .playlist-selector select {
-            background-color: #444444;
-            color: white;
-            border-color: rgba(30, 215, 96, 0.2);
-        }
-
-        .autoplay-toggle {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .spotify-search {
-            margin-top: 15px;
-        }
-
-        .spotify-search input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid rgba(30, 215, 96, 0.3);
-            margin-bottom: 10px;
-        }
-
-        body.dark-mode .spotify-search input {
-            background-color: #444444;
-            color: white;
-            border-color: rgba(30, 215, 96, 0.2);
-        }
-
-        .search-results {
-            max-height: 200px;
-            overflow-y: auto;
-            border-radius: 5px;
-        }
-
-        .search-result-item {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-        body.dark-mode .search-result-item {
-            border-bottom-color: rgba(255,255,255,0.1);
-        }
-
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-
-        .search-result-item img {
-            border-radius: 3px;
-            margin-right: 10px;
-        }
-
-        .search-result-item div:nth-child(2) {
-            flex-grow: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 0.85rem;
-        }
-
-        .mini-button {
-            background-color: #1DB954;
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            margin-left: 5px;
-        }
-
-        .mini-button:hover {
-            background-color: #1ED760;
-        }
-        
-        /* Ensure responsive design on mobile */
-        @media (max-width: 768px) {
-            .playlist-selectors {
-                grid-template-columns: 1fr;
-            }
-            
-            .track-info {
-                font-size: 0.8rem;
-            }
-            
-            .album-art {
-                width: 50px;
-                height: 50px;
-            }
-            
-            .control-button {
-                width: 35px;
-                height: 35px;
-                font-size: 1.3rem;
-            }
-        }
-
-        /* Adjust body to ensure proper centering and visibility */
-        body {
-            padding-top: 80px; /* Add space at the top */
-            padding-bottom: 80px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start; /* Changed from center to flex-start */
-            overflow-x: hidden;
-            overflow-y: auto;
-            box-sizing: border-box;
-        }
-        
-        /* Fix main container positioning */
-        .main-container {
-            margin-top: 20px;
-            margin-bottom: 40px;
-            max-height: calc(100vh - 160px); /* Account for body padding */
-            overflow-y: visible;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        /* Ensure the dark mode button is visible and accessible */
-        .dark-mode-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1100;
-        }
-        
-        /* Ensure containers have proper height */
-        .container, .tasks, .spotify-container {
-            max-height: calc(100vh - 200px);
-            overflow-y: auto;
-        }
-
-        /* Refined scrollbar style */
-        .container::-webkit-scrollbar, 
-        .tasks::-webkit-scrollbar, 
-        .spotify-container::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .container::-webkit-scrollbar-thumb, 
-        .tasks::-webkit-scrollbar-thumb, 
-        .spotify-container::-webkit-scrollbar-thumb {
-            background: rgba(130, 234, 255, 0.5);
-            border-radius: 3px;
-        }
-
-        body.dark-mode .container::-webkit-scrollbar-thumb, 
-        body.dark-mode .tasks::-webkit-scrollbar-thumb, 
-        body.dark-mode .spotify-container::-webkit-scrollbar-thumb {
-            background: rgba(80, 80, 80, 0.8);
-        }
     </style>
-    <script src="https://raw.githubusercontent.com/IshanAsati/pomidor/refs/heads/main/spotify.js" defer></script>
 </head>
 <body>
     <button class="dark-mode-button" id="darkModeButton">Toggle Dark Mode</button>
@@ -2257,61 +1870,6 @@
                 <p>Time to relax or add new tasks</p>
             </div>
         </div>
-        
-        <!-- Fixed and completed Spotify container -->
-        <div class="spotify-container">
-            <div class="spotify-header">
-                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png" alt="Spotify" class="spotify-logo">
-                <h4>Music</h4>
-                <button id="spotifyConnect" class="spotify-connect">Connect</button>
-            </div>
-            
-            <div id="spotifyPlayer" class="spotify-player">
-                <div class="track-info-container">
-                    <img id="spotifyAlbumArt" class="album-art" src="" alt="Album Art">
-                    <div id="spotifyTrackInfo" class="track-info">No track playing</div>
-                </div>
-                
-                <div class="player-controls">
-                    <button id="spotifyPrev" class="control-button">⏮️</button>
-                    <button id="spotifyPlay" class="control-button">▶️</button>
-                    <button id="spotifyNext" class="control-button">⏭️</button>
-                </div>
-                
-                <div class="spotify-settings">
-                    <h5>Session Music</h5>
-                    <div class="playlist-selectors">
-                        <div class="playlist-selector">
-                            <label for="workPlaylist">Work Sessions:</label>
-                            <select id="workPlaylist">
-                                <option value="">Select playlist...</option>
-                            </select>
-                        </div>
-                        <div class="playlist-selector">
-                            <label for="breakPlaylist">Break Sessions:</label>
-                            <select id="breakPlaylist">
-                                <option value="">Select playlist...</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="autoplay-toggle">
-                        <label for="spotifyAutoPlay">
-                            Auto-play with timer:
-                            <span class="toggle-switch">
-                                <input type="checkbox" id="spotifyAutoPlay">
-                                <span class="toggle-slider"></span>
-                            </span>
-                        </label>
-                    </div>
-                    
-                    <div class="spotify-search">
-                        <input type="text" id="spotifySearch" placeholder="Search playlists...">
-                        <div id="spotifySearchResults" class="search-results"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="fullscreen-timer" id="fullscreenTimer">
@@ -2336,7 +1894,7 @@
         </a>
     </div>
 
-    <div class="credits"></div>
+    <div class="credits">
         Built with <span class="heart">❤️</span> by <a href="https://github.com/ishanasati">@ishanasati</a> and GitHub Copilot AI
     </div>
 
@@ -2730,44 +2288,6 @@
 
         // Initialize fullscreen display
         timerFunctions.updateDisplay();
-
-        // Add window resize handler to adjust layout
-        window.addEventListener('resize', () => {
-            // Adjust height of task container on desktop
-            if (window.innerWidth > 768) {
-                document.querySelector('.tasks').style.height = 'calc(100vh - 80px)';
-            } else {
-                document.querySelector('.tasks').style.height = 'auto';
-                document.querySelector('.tasks').style.maxHeight = 'calc(100vh - 480px)';
-            }
-        });
-
-        // Initialize proper height on page load
-        window.dispatchEvent(new Event('resize'));
-
-        // Fix Spotify script path and add event for session changes
-        document.addEventListener('DOMContentLoaded', () => {
-            // Load Spotify script dynamically to ensure it exists
-            const spotifyScript = document.createElement('script');
-            spotifyScript.src = '/home/kdot/Documents/pomidor/spotify.js';
-            spotifyScript.async = true;
-            document.body.appendChild(spotifyScript);
-            
-            // Create a custom event dispatcher for session changes
-            function notifySessionChange(isWorking) {
-                const event = new CustomEvent('pomidor:sessionChanged', {
-                    detail: { isWorking: isWorking }
-                });
-                document.dispatchEvent(event);
-            }
-            
-            // Add this to handleTimerComplete function to notify Spotify
-            const originalHandleTimerComplete = timerFunctions.handleTimerComplete;
-            timerFunctions.handleTimerComplete = function() {
-                originalHandleTimerComplete.call(this);
-                notifySessionChange(!timer.isWorking); // Notify about the new state
-            };
-        });
     </script>
 </body>
 </html>
