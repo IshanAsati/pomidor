@@ -12,110 +12,130 @@
             transition: all 0.3s ease;
         }
 
+        /* Fix body centering and positioning */
         body {
-            font-family: 'Source Sans 3', sans-serif;
-            margin: 0;
             padding: 0;
+            margin: 0;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            overflow-x: hidden;
+            box-sizing: border-box;
             background: #82EAFF;
             color: #333333;
+            font-family: 'Source Sans 3', sans-serif;
         }
+
         body.dark-mode {
             background: #222222;
             color: #E1D9D1;
         }
 
+        /* Improve main container */
         .main-container {
             display: grid;
-            grid-template-columns: 350px minmax(350px, 1fr) 300px;
-            gap: 20px;
-            width: 95%;
-            max-width: 1800px;
-            margin: 40px auto;
-            min-height: calc(100vh - 100px);
-            padding: 0;
-            align-items: start;
+            grid-template-columns: minmax(280px, 350px) minmax(280px, 400px) minmax(250px, 300px);
+            gap: 25px;
+            width: 90%;
+            max-width: 1600px;
+            min-height: 600px;
+            height: auto;
+            margin: 0 auto;
+            padding: 20px 0;
+            box-sizing: border-box;
+            position: relative;
+            place-items: start;
         }
 
+        /* Fix container sizing and scrolling */
         .container, .tasks, .spotify-container {
+            height: auto;
+            min-height: 600px;
+            max-height: 80vh;
+            width: 100%;
+            overflow: hidden; /* Hide scrollbars by default */
+            display: flex;
+            flex-direction: column;
             background: #fff;
             border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            padding: 20px;
-            height: auto;
-            width: 100%;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            padding: 25px;
             box-sizing: border-box;
-            margin: 0;
+            position: relative;
+        }
+
+        /* Only show scrollbars when content overflows */
+        .tasks {
             overflow-y: auto;
-            max-height: calc(100vh - 100px);
         }
 
-        body.dark-mode .container, 
-        body.dark-mode .tasks, 
-        body.dark-mode .spotify-container {
-            background: #333;
-            color: #fff;
+        /* Task list takes remaining space */
+        .tasks ul {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 0;
+            padding-bottom: 10px;
         }
 
+        /* Better responsive behavior for all screen sizes */
         @media (max-width: 1200px) {
             .main-container {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
                 grid-template-rows: auto auto;
-            }
-            
-            .container {
-                grid-column: 1;
-                grid-row: 1;
-            }
-            
-            .tasks {
-                grid-column: 2;
-                grid-row: 1;
+                gap: 20px;
             }
             
             .spotify-container {
                 grid-column: 1 / -1;
-                grid-row: 2;
+                min-height: 400px;
             }
         }
 
         @media (max-width: 768px) {
             .main-container {
                 grid-template-columns: 1fr;
-                grid-template-rows: auto auto auto;
+                width: 95%;
                 gap: 15px;
-                padding: 10px;
-                margin: 20px auto;
+                padding: 15px 0;
             }
-            
-            .container {
-                grid-column: 1;
-                grid-row: 1;
-            }
-            
-            .tasks {
-                grid-column: 1;
-                grid-row: 2;
-            }
-            
-            .spotify-container {
-                grid-column: 1;
-                grid-row: 3;
-            }
-            
+
             .container, .tasks, .spotify-container {
+                min-height: auto;
                 max-height: none;
-                width: 100%;
+                padding: 15px;
             }
         }
 
-        body.dark-mode .container {
-            background: #333333;
-            color: #ffffff;
+        /* Remove fixed heights */
+        .timer-container, .task-input-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* Dark mode container styling */
+        body.dark-mode .container, 
+        body.dark-mode .tasks, 
+        body.dark-mode .spotify-container {
+            background: #333;
+            color: #fff;
+        }
+        
+        /* Fix zoom behavior */
+        @media (max-width: 600px), (max-height: 700px) {
+            html {
+                font-size: 14px;
+            }
+            
+            .main-container {
+                transform: scale(0.95);
+                transform-origin: center top;
+            }
+            
+            .timer {
+                font-size: 4rem;
+            }
         }
 
         .header h1 {
