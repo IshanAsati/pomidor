@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+*.log
+
+# Build output
+dist/
+.vite/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# Old files
+index_old.html
+
+# Cache
+.cache/
+*.cache
+
+# PWA assets (generated)
+sw.js
+workbox-*.js
