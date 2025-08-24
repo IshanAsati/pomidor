@@ -88,7 +88,7 @@ export function validateUrl(url: string): boolean {
  */
 export function containsXSS(input: string): boolean {
   const xssPatterns = [
-    /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+    /<script[\s\S]*?<\/script>/gi, // More robust script tag detection
     /javascript:/gi,
     /on\w+\s*=/gi,
     /<iframe/gi,
