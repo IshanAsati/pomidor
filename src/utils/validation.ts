@@ -41,7 +41,7 @@ export function validateVolume(value: number | string): number | null {
 export function sanitizeTaskText(text: string): string {
   return text
     .trim()
-    .replace(/[<>\"'&]/g, '') // Remove potentially dangerous characters
+    .replace(/[<>"'&]/g, '') // Remove potentially dangerous characters
     .substring(0, 200); // Limit length
 }
 
@@ -59,7 +59,7 @@ export function validatePriority(priority: string): 'high' | 'medium' | 'low' {
 export function sanitizeCategory(category: string): string {
   return category
     .trim()
-    .replace(/[<>\"'&]/g, '')
+    .replace(/[<>"'&]/g, '')
     .substring(0, 50);
 }
 
@@ -200,30 +200,34 @@ export function validateInput(
   }
   
   switch (type) {
-    case 'duration':
+    case 'duration': {
       const duration = validateTimerDuration(value);
       return duration !== null 
         ? { isValid: true, value: duration }
         : { isValid: false, error: 'Duration must be between 1 and 60 minutes' };
+    }
         
-    case 'sessions':
+    case 'sessions': {
       const sessions = validateSessionCount(value);
       return sessions !== null
         ? { isValid: true, value: sessions }
         : { isValid: false, error: 'Sessions must be between 1 and 10' };
+    }
         
-    case 'volume':
+    case 'volume': {
       const volume = validateVolume(value);
       return volume !== null
         ? { isValid: true, value: volume }
         : { isValid: false, error: 'Volume must be between 0 and 100' };
+    }
         
-    case 'text':
+    case 'text': {
       if (containsXSS(value)) {
         return { isValid: false, error: 'Invalid characters detected' };
       }
       const sanitized = sanitizeTaskText(value);
       return { isValid: true, value: sanitized };
+    }
       
     case 'email':
       return validateEmail(value)
