@@ -1,0 +1,139 @@
+{
+  "app": {
+    "title": "Pomidor Timer",
+    "subtitle": "Your comprehensive productivity companion",
+    "description": "A comprehensive Pomodoro timer for enhanced productivity and time management"
+  },
+  "timer": {
+    "start": "Start",
+    "stop": "Stop",
+    "reset": "Reset",
+    "settings": "Settings",
+    "focusTime": "Focus Time",
+    "breakTime": "Break Time",
+    "longBreak": "Long Break",
+    "session": "Session",
+    "completed": "Session Complete!"
+  },
+  "tasks": {
+    "title": "Tasks",
+    "addTask": "Add a new task...",
+    "addButton": "Add",
+    "priority": "Priority",
+    "category": "Category (optional)",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "all": "All",
+    "pending": "Pending",
+    "completed": "Completed",
+    "clearCompleted": "Clear Completed",
+    "editTask": "Edit task",
+    "deleteTask": "Delete task",
+    "markComplete": "Mark as complete",
+    "markIncomplete": "Mark as incomplete",
+    "confirmDelete": "Delete this task?",
+    "confirmClearCompleted": "Delete {{count}} completed task(s)?",
+    "emptyState": "No tasks yet",
+    "emptyStateDesc": "Add your first task to get started"
+  },
+  "statistics": {
+    "title": "Today's Progress",
+    "pomodoros": "Pomodoros",
+    "tasks": "Tasks",
+    "focusTime": "Focus Time",
+    "score": "Score",
+    "sessionsToday": "Sessions Today",
+    "averageSession": "Average Session",
+    "productivity": "Productivity Score"
+  },
+  "settings": {
+    "title": "Settings",
+    "timerDuration": "Timer Duration",
+    "workSession": "Work Session (mins)",
+    "shortBreak": "Short Break (mins)",
+    "longBreak": "Long Break (mins)",
+    "sessionsBeforeLongBreak": "Sessions before long break",
+    "behavior": "Behavior",
+    "autoStart": "Auto-start next session",
+    "enableNotifications": "Enable Notifications",
+    "sound": "Sound",
+    "enableSound": "Enable Sound",
+    "volume": "Volume",
+    "advanced": "Advanced",
+    "resetAllData": "Reset All Data",
+    "enableAnalytics": "Enable Analytics",
+    "close": "Close"
+  },
+  "notifications": {
+    "workComplete": {
+      "title": "🍅 Pomodoro Complete!",
+      "body": "Great job! Time for a well-deserved break."
+    },
+    "breakComplete": {
+      "title": "⏰ Break Time Over",
+      "body": "Ready to get back to work? Let's focus!"
+    },
+    "longBreakComplete": {
+      "title": "🌟 Long Break Complete",
+      "body": "You've earned this rest. Ready for another productive session?"
+    },
+    "taskComplete": {
+      "title": "✅ Task Completed!",
+      "body": "\"{{task}}\" - Great work!"
+    },
+    "dailySummary": {
+      "title": "📊 Daily Summary",
+      "body": "{{pomodoros}} pomodoros • {{tasks}} tasks • {{time}} focused"
+    },
+    "permission": {
+      "title": "Enable Notifications?",
+      "description": "Get notified when your sessions complete for better productivity tracking.",
+      "enable": "Enable",
+      "maybeLater": "Maybe Later"
+    }
+  },
+  "accessibility": {
+    "toggleDarkMode": "Toggle Dark Mode",
+    "enterFullscreen": "Enter Fullscreen Mode",
+    "exitFullscreen": "Exit Fullscreen Mode",
+    "timerDisplay": "Timer Display",
+    "progressBar": "Session Progress",
+    "volumeSlider": "Volume Control"
+  },
+  "data": {
+    "title": "Data Management",
+    "export": "Export Data",
+    "import": "Import Data",
+    "exportSuccess": "Data exported successfully",
+    "importSuccess": "Data imported successfully",
+    "importError": "Failed to import data. Please check the file format.",
+    "resetConfirm": "Are you sure you want to reset all data? This action cannot be undone.",
+    "resetSuccess": "All data has been reset"
+  },
+  "errors": {
+    "initializationFailed": "Pomidor failed to start. Please refresh the page.",
+    "refreshPage": "Refresh Page",
+    "invalidDuration": "Duration must be between 1 and 60 minutes",
+    "invalidSessions": "Sessions must be between 1 and 10",
+    "invalidVolume": "Volume must be between 0 and 100",
+    "taskRequired": "Task text cannot be empty",
+    "invalidCharacters": "Invalid characters detected",
+    "rateLimited": "Please wait before performing this action again"
+  },
+  "pwa": {
+    "installPrompt": "Install App",
+    "installDescription": "Install Pomidor for a better experience with offline access and notifications.",
+    "install": "Install",
+    "dismiss": "Not Now"
+  },
+  "shortcuts": {
+    "title": "Keyboard Shortcuts",
+    "space": "Start/Stop Timer",
+    "r": "Reset Timer",
+    "s": "Open Settings",
+    "f": "Toggle Fullscreen",
+    "d": "Toggle Dark Mode",
+    "escape": "Close Modals"
+  }
+}

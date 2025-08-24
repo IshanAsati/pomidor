@@ -1,0 +1,96 @@
+{
+  "app": {
+    "title": "Temporizador Pomidor",
+    "subtitle": "Tu compañero integral de productividad",
+    "description": "Un temporizador Pomodoro integral para mejorar la productividad y gestión del tiempo"
+  },
+  "timer": {
+    "start": "Iniciar",
+    "stop": "Parar",
+    "reset": "Reiniciar",
+    "settings": "Configuración",
+    "focusTime": "Tiempo de Enfoque",
+    "breakTime": "Tiempo de Descanso",
+    "longBreak": "Descanso Largo",
+    "session": "Sesión",
+    "completed": "¡Sesión Completada!"
+  },
+  "tasks": {
+    "title": "Tareas",
+    "addTask": "Agregar una nueva tarea...",
+    "addButton": "Agregar",
+    "priority": "Prioridad",
+    "category": "Categoría (opcional)",
+    "high": "Alta",
+    "medium": "Media",
+    "low": "Baja",
+    "all": "Todas",
+    "pending": "Pendientes",
+    "completed": "Completadas",
+    "clearCompleted": "Limpiar Completadas",
+    "editTask": "Editar tarea",
+    "deleteTask": "Eliminar tarea",
+    "markComplete": "Marcar como completada",
+    "markIncomplete": "Marcar como incompleta",
+    "confirmDelete": "¿Eliminar esta tarea?",
+    "confirmClearCompleted": "¿Eliminar {{count}} tarea(s) completada(s)?",
+    "emptyState": "Aún no hay tareas",
+    "emptyStateDesc": "Agrega tu primera tarea para comenzar"
+  },
+  "statistics": {
+    "title": "Progreso de Hoy",
+    "pomodoros": "Pomodoros",
+    "tasks": "Tareas",
+    "focusTime": "Tiempo de Enfoque",
+    "score": "Puntuación",
+    "sessionsToday": "Sesiones Hoy",
+    "averageSession": "Sesión Promedio",
+    "productivity": "Puntuación de Productividad"
+  },
+  "settings": {
+    "title": "Configuración",
+    "timerDuration": "Duración del Temporizador",
+    "workSession": "Sesión de Trabajo (mins)",
+    "shortBreak": "Descanso Corto (mins)",
+    "longBreak": "Descanso Largo (mins)",
+    "sessionsBeforeLongBreak": "Sesiones antes del descanso largo",
+    "behavior": "Comportamiento",
+    "autoStart": "Iniciar automáticamente la siguiente sesión",
+    "enableNotifications": "Habilitar Notificaciones",
+    "sound": "Sonido",
+    "enableSound": "Habilitar Sonido",
+    "volume": "Volumen",
+    "advanced": "Avanzado",
+    "resetAllData": "Reiniciar Todos los Datos",
+    "enableAnalytics": "Habilitar Analíticas",
+    "close": "Cerrar"
+  },
+  "notifications": {
+    "workComplete": {
+      "title": "🍅 ¡Pomodoro Completado!",
+      "body": "¡Buen trabajo! Hora de un merecido descanso."
+    },
+    "breakComplete": {
+      "title": "⏰ Tiempo de Descanso Terminado",
+      "body": "¿Listo para volver al trabajo? ¡Vamos a enfocarnos!"
+    },
+    "longBreakComplete": {
+      "title": "🌟 Descanso Largo Completado",
+      "body": "Te has ganado este descanso. ¿Listo para otra sesión productiva?"
+    },
+    "taskComplete": {
+      "title": "✅ ¡Tarea Completada!",
+      "body": "\"{{task}}\" - ¡Excelente trabajo!"
+    },
+    "dailySummary": {
+      "title": "📊 Resumen Diario",
+      "body": "{{pomodoros}} pomodoros • {{tasks}} tareas • {{time}} enfocado"
+    },
+    "permission": {
+      "title": "¿Habilitar Notificaciones?",
+      "description": "Recibe notificaciones cuando completes sesiones para mejor seguimiento de productividad.",
+      "enable": "Habilitar",
+      "maybeLater": "Tal vez Después"
+    }
+  }
+}
